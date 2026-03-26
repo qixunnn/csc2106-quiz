@@ -516,10 +516,15 @@
                     const optionDiv = document.createElement('div');
                     optionDiv.className = 'option';
                     optionDiv.innerHTML = `
-                        <input type="radio" name="q${questionIndex}" id="q${questionIndex}-${optIndex}" 
-                               onchange="selectOption(${questionIndex}, ${optIndex})">
+                        <input type="radio" name="q${questionIndex}" id="q${questionIndex}-${optIndex}">
                         <label for="q${questionIndex}-${optIndex}">${option}</label>
                     `;
+                    
+                    optionDiv.onclick = () => {
+                        const radio = document.getElementById(`q${questionIndex}-${optIndex}`);
+                        radio.checked = true;
+                        selectOption(questionIndex, optIndex);
+                    };
                     optionsDiv.appendChild(optionDiv);
                 });
             } else if (q.type === 'multiple') {
