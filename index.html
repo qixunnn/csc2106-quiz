@@ -533,7 +533,11 @@
                     optionDiv.className = 'option';
                     optionDiv.innerHTML = `
                         <input type="checkbox" name="q${questionIndex}" id="q${questionIndex}-${optIndex}" 
-                               onchange="selectMultiple(${questionIndex}, ${optIndex})">
+                               optionDiv.onclick = () => {
+                                    const checkbox = document.getElementById(`q${questionIndex}-${optIndex}`);
+                                    checkbox.checked = !checkbox.checked;
+                                    selectMultiple(questionIndex, optIndex);
+                                };
                         <label for="q${questionIndex}-${optIndex}">${option}</label>
                     `;
                     optionsDiv.appendChild(optionDiv);
