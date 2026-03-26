@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IoT Quiz Practice - Chapter 1</title>
+    <title>IoT Quiz Practice</title>
     <style>
         * {
             margin: 0;
@@ -253,6 +253,41 @@
             display: none;
         }
 
+        .topic-tabs {
+            display: flex;
+            gap: 0;
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 6px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .topic-tab {
+            padding: 10px 22px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: transparent;
+            color: rgba(255,255,255,0.75);
+        }
+
+        .topic-tab:hover {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .topic-tab.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
         @media (max-width: 768px) {
             .controls {
                 flex-direction: column;
@@ -268,7 +303,11 @@
     <div class="container">
         <div class="header">
             <h1>🌐 IoT Quiz Practice</h1>
-            <p>Chapter 1: Introduction to IoT</p>
+            <p id="topic-subtitle">Chapter 1: Introduction to IoT</p>
+            <div class="topic-tabs">
+                <button class="topic-tab active" onclick="switchTopic(0)">📡 Topic 1: Intro to IoT</button>
+                <button class="topic-tab" onclick="switchTopic(1)">🔗 Topic 2: HTTP &amp; REST</button>
+            </div>
         </div>
 
         <div class="content">
@@ -449,9 +488,199 @@
             }
         ];
 
+        const restQuestions = [
+            {
+                question: "What is a resource in the context of RESTful web services?",
+                type: 'single',
+                options: [
+                    "A set of procedures for accessing a database",
+                    "A function that performs a specific action",
+                    "An entity that can be accessed and manipulated through a URI",
+                    "A container for storing data in a web application"
+                ],
+                correct: 2,
+                explanation: "A resource is any entity identified by a URI that can be accessed and manipulated."
+            },
+            {
+                question: "Which of the following is NOT a constraint of RESTful architecture?",
+                type: 'single',
+                options: [
+                    "Statelessness",
+                    "Cookie-based authentication",
+                    "Cacheability",
+                    "Client-server architecture"
+                ],
+                correct: 1,
+                explanation: "Cookie-based authentication is not a REST constraint. REST constraints include statelessness, cacheability, and client-server."
+            },
+            {
+                question: "What does REST stand for?",
+                type: 'single',
+                options: [
+                    "Representational State Transfer",
+                    "Relative State Transmission",
+                    "Remote Server Transaction",
+                    "Real-time State Transfer"
+                ],
+                correct: 0,
+                explanation: "REST stands for Representational State Transfer."
+            },
+            {
+                question: "What is the HTTP method used to create a new resource in RESTful architecture?",
+                type: 'single',
+                options: [
+                    "PUT",
+                    "DELETE",
+                    "POST",
+                    "GET"
+                ],
+                correct: 2,
+                explanation: "POST is used to create a new resource."
+            },
+            {
+                question: "Which HTTP method should be used to update an existing resource in RESTful web services?",
+                type: 'single',
+                options: [
+                    "DELETE",
+                    "PUT",
+                    "POST",
+                    "GET"
+                ],
+                correct: 1,
+                explanation: "PUT is used to update or replace an existing resource."
+            },
+            {
+                question: "Which of the following HTTP methods is used to retrieve a resource in RESTful architecture?",
+                type: 'single',
+                options: [
+                    "DELETE",
+                    "POST",
+                    "GET",
+                    "PUT"
+                ],
+                correct: 2,
+                explanation: "GET is used to retrieve data from the server."
+            },
+            {
+                question: "What does idempotence mean in the context of RESTful APIs?",
+                type: 'single',
+                options: [
+                    "The API produces different results with each request",
+                    "The API encrypts data for security",
+                    "The API produces the same result no matter how many times the same request is made",
+                    "The API can handle asynchronous requests"
+                ],
+                correct: 2,
+                explanation: "Idempotent operations produce the same result even if repeated multiple times."
+            },
+            {
+                question: "Which HTTP status code indicates a successful GET request in a RESTful API?",
+                type: 'single',
+                options: [
+                    "400 Bad Request",
+                    "500 Internal Server Error",
+                    "200 OK",
+                    "201 Created"
+                ],
+                correct: 2,
+                explanation: "200 OK indicates a successful GET request."
+            },
+            {
+                question: "In RESTful APIs, what does a status code in the 5xx range signify?",
+                type: 'single',
+                options: [
+                    "Successful operation",
+                    "Redirection",
+                    "Server error",
+                    "Client error"
+                ],
+                correct: 2,
+                explanation: "5xx status codes indicate server-side errors."
+            },
+            {
+                question: "In RESTful APIs, what is the purpose of a payload in a POST request?",
+                type: 'single',
+                options: [
+                    "To provide additional headers",
+                    "To deliver the client's request to the server",
+                    "To carry control information",
+                    "To contain the data being sent by the client"
+                ],
+                correct: 3,
+                explanation: "The payload contains the data sent from client to server."
+            },
+            {
+                question: "What mechanism does RESTful APIs use to indicate the current state of the resource?",
+                type: 'single',
+                options: [
+                    "HTTP status codes",
+                    "HTTP headers",
+                    "API tokens",
+                    "Response body"
+                ],
+                correct: 0,
+                explanation: "HTTP status codes indicate the outcome/state of a request."
+            },
+            {
+                question: "What is the primary role of a RESTful API's Uniform Interface constraint?",
+                type: 'single',
+                options: [
+                    "To standardize the way clients interact with the server",
+                    "To separate client and server implementations",
+                    "To ensure that the API is stateful",
+                    "To define specific operations like GET and POST"
+                ],
+                correct: 0,
+                explanation: "Uniform Interface ensures consistent interaction between client and server."
+            },
+            {
+                question: "What type of architecture do RESTful APIs follow?",
+                type: 'single',
+                options: [
+                    "Monolithic architecture",
+                    "Microservices architecture",
+                    "Peer-to-peer architecture",
+                    "Client-server architecture",
+                    "Publisher-Subscriber architecture"
+                ],
+                correct: 3,
+                explanation: "REST follows client-server architecture."
+            },
+            {
+                question: "In RESTful APIs, what is used to uniquely identify a resource?",
+                type: 'single',
+                options: [
+                    "Query parameters",
+                    "URI (Uniform Resource Identifier)",
+                    "Session ID",
+                    "API key"
+                ],
+                correct: 1,
+                explanation: "Each resource is uniquely identified by a URI."
+            }
+        ];
+
+        const allTopics = [
+            { label: "Chapter 1: Introduction to IoT", questions: questions },
+            { label: "Chapter 2: HTTP & REST", questions: restQuestions }
+        ];
+
+        let activeTopic = 0;
         let userAnswers = [];
         let showingAnswers = false;
         let currentQuestions = [...questions];
+
+        function switchTopic(topicIndex) {
+            activeTopic = topicIndex;
+            document.querySelectorAll('.topic-tab').forEach((tab, i) => {
+                tab.classList.toggle('active', i === topicIndex);
+            });
+            document.getElementById('topic-subtitle').textContent = allTopics[topicIndex].label;
+            currentQuestions = [...allTopics[topicIndex].questions];
+            showingAnswers = false;
+            document.getElementById('score').style.display = 'none';
+            renderQuiz();
+        }
 
         function renderQuiz() {
             const container = document.getElementById('quiz-container');
@@ -737,7 +966,7 @@
         }
 
         function shuffleQuestions() {
-            currentQuestions = [...questions].sort(() => Math.random() - 0.5);
+            currentQuestions = [...allTopics[activeTopic].questions].sort(() => Math.random() - 0.5);
             resetQuiz();
             renderQuiz();
         }
