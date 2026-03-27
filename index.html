@@ -870,7 +870,15 @@
                 d.id = `dropdown-${qi}-${ii}`;
                 const max = q.type === 'dropdown' ? 5 : 4;
                 let opts = '<option value="">—</option>';
-                for (let i = 1; i <= max; i++) opts += `<option value="${i}">${i}</option>`;
+                if (q.type === 'match' && item.descriptions) {
+                    item.descriptions.forEach((desc, i) => {
+                        opts += `<option value="${i + 1}">${desc}</option>`;
+                    });
+                } else {
+                    for (let i = 1; i <= max; i++) {
+                        opts += `<option value="${i}">${i}</option>`;
+                    }
+                }
                 d.innerHTML = `<span>${item.name}</span><select onchange="selectDropdown(${qi},${ii},this.value)">${opts}</select>`;
                 div.appendChild(d);
             });
