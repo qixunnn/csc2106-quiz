@@ -425,9 +425,14 @@
                 <span class="nav-count" id="count-1">14</span>
             </button>
             <button class="nav-item" onclick="switchTopic(2)" id="nav-2">
+                <span class="nav-icon">o0o</span>
+                CoAP &amp; MQTT
+                <span class="nav-count" id="count-2">24</span>
+            </button>
+            <button class="nav-item" onclick="switchTopic(3)" id="nav-3">
                 <span class="nav-icon">📶</span>
                 Z-Wave &amp; ZigBee
-                <span class="nav-count" id="count-2">12</span>
+                <span class="nav-count" id="count-3">12</span>
             </button>
         </div>
 
@@ -446,7 +451,8 @@
         <div class="mobile-nav">
             <button class="mobile-nav-btn active" onclick="switchTopic(0)" id="mnav-0">📡 Intro to IoT</button>
             <button class="mobile-nav-btn" onclick="switchTopic(1)" id="mnav-1">🔗 HTTP &amp; REST</button>
-            <button class="mobile-nav-btn" onclick="switchTopic(2)" id="mnav-2">📶 Z-Wave &amp; ZigBee</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(2)" id="mnav-2">o0o CoAP &amp; MQTT</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(3)" id="mnav-3">📶 Z-Wave &amp; ZigBee</button>
             <button class="mobile-nav-btn" onclick="checkAnswers()">⚡ Check</button>
             <button class="mobile-nav-btn" onclick="shuffleQuestions()">🔀 Shuffle</button>
             <button class="mobile-nav-btn" onclick="toggleAnswers()">💡 Answers</button>
@@ -583,6 +589,57 @@ const restQuestions = [
     { question: "In RESTful APIs, what is used to uniquely identify a resource?", type: 'single', options: ["Query parameters","URI (Uniform Resource Identifier)","Session ID","API key"], correct: 1, explanation: "Each resource is uniquely identified by a URI." }
 ];
 
+const CoAPMQTTQuestions = [
+    { question: "CoAP provides which of the following requirements?", type: 'single', options: ["Multicast support and simplicity","Simplicity and low overhead","Multicast support, lower overhead and simplicity","Lower overhead and multicast support"], correct: 2, explanation: "CoAP is designed for multicast support, low overhead, and simplicity." },
+    { question: "What is the maximum number of clients that can subscribe to a single topic in MQTT?", type: 'single', options: ["1","Unlimited","100","10"], correct: 1, explanation: "MQTT allows unlimited clients to subscribe to a topic." },
+    { question: "The Last Will Message is used to:", type: 'single', options: ["Guarantee that the message was delivered","Gain inheritance","Notify a publisher of a network failure","Notify clients of a failure in the publisher"], correct: 3, explanation: "It notifies subscribers if a publisher disconnects unexpectedly." },
+    { question: "What is the default port number for MQTT?", type: 'single', options: ["80","8080","1883","8883"], correct: 2, explanation: "Default MQTT port is 1883 BUT quiz shows 1833 BEWARD!!!!!!!." },
+    { question: "Which protocol is CoAP closely modeled after?", type: 'single', options: ["HTTP","FTP","AMQP","MQTT"], correct: 0, explanation: "CoAP is modeled after HTTP." },
+    { question: "What does MQTT stand for?", type: 'single', options: ["Message Querying Telecommunication Transmission","Message Queuing Telemetry Transport","Message Queuing Transaction Transport","Message Quorum Transport Technology"], correct: 1, explanation: "MQTT stands for Message Queuing Telemetry Transport." },
+    { question: "CoAP messages can be of which types?", type: 'single', options: ["Persistent and Transient","Request and Response","Confirmable and Non-Confirmable","Synchronous and Asynchronous"], correct: 2, explanation: "CoAP uses Confirmable and Non-Confirmable message types." },
+    { question: "CoAP is a specialised _________ protocol.", type: 'single', options: ["Web transfer","Application","Resource","Power"], correct: 1, explanation: "CoAP is an application layer protocol." },
+    { question: "CoAP supports which of the following methods similar to HTTP?", type: 'single', options: ["CONNECT, TRACE, PATCH","GET, POST, PUT, DELETE","None of them","OPTIONS, HEAD"], correct: 1, explanation: "CoAP supports HTTP-like methods such as GET, POST, PUT, DELETE." },
+    { question: "What is a topic in MQTT?", type: 'single', options: ["A client identifier","A message payload","A string used to filter messages in a publish/subscribe model","A unique identifier for a message"], correct: 2, explanation: "Topics are used to filter messages in MQTT." },
+    { question: "What does CoAP stand for?", type: 'single', options: ["Control Application Protocol","Constrained Application Protocol","Compact Application Protocol","Common Application Protocol"], correct: 1, explanation: "CoAP stands for Constrained Application Protocol." },
+    { question: "Which of the following QoS levels in MQTT ensures message delivery at least once?", type: 'single', options: ["None of them","QoS 0","QoS 2","QoS 1"], correct: 3, explanation: "QoS 1 guarantees delivery at least once." },
+    { question: "MQTT transmits data to and from a broker in which format?", type: 'single', options: ["Text based data","JSON","XML","Binary data"], correct: 3, explanation: "MQTT uses binary format for efficient transmission." },
+    { question: "To receive a retained message?", type: 'single', options: ["You must subscribe to a topic that has been published with the retained message set.","You must subscribe with a QOS of 1 or 2","You must subscribe with the retained message set.","You must keep the message."], correct: 0, explanation: "Subscribers receive retained messages upon subscribing." },
+    { question: "MQTT is _______ oriented.", type: 'single', options: ["Data","Network","Message","Device"], correct: 2, explanation: "MQTT is message-oriented." },
+    { question: "CoAP is specialized in?", type: 'single', options: ["Device applications","Wireless applications","Wired applications","Internet applications"], correct: 3, explanation: "CoAP is specialized in internet applications." },
+    { question: "Which of the following is not a client type in MQTT?", type: 'single', options: ["Subscriber","Producer","Publisher","Broker"], correct: 1, explanation: "Producer is not a standard MQTT client type." },
+    { question: "The core of the protocol is specified in ______?", type: 'single', options: ["RFC 7452","RFC 7252","RFC 7254","RFC 7524"], correct: 1, explanation: "CoAP is defined in RFC 7252." },
+    { question: "CoAP is designed for which kind of networks?", type: 'single', options: ["Wide Area Networks (WAN)","Resource-constrained networks","Local Area Networks (LAN)","Datacenter Networks"], correct: 1, explanation: "CoAP is designed for resource-constrained networks." },
+    { question: "How does the publisher know who is subscribing in MQTT?", type: 'single', options: ["The subscriber informs the publisher","Publisher uses the 'Eye of Sauron'","The publisher gets notified when they subscribe.","The publisher doesn't know"], correct: 3, explanation: "MQTT publishers are decoupled and do not know subscribers." },
+    { question: "Which layer is CoAP?", type: 'single', options: ["Service layer","Control layer","Application layer","Transport layer"], correct: 2, explanation: "CoAP operates at the application layer." },
+    { question: "Which of the following is not a characteristic of MQTT?", type: 'single', options: ["Publish/subscribe messaging model","Quality of Service (QoS)","Request/response messaging model","Low overhead"], correct: 2, explanation: "MQTT uses pub/sub, not request/response." },
+    { question: "What transport layer protocol does CoAP use?", type: 'single', options: ["ICMP","REST","TCP","UDP"], correct: 3, explanation: "CoAP uses UDP." },
+    { question: "What type of protocol is MQTT?", type: 'single', options: ["Network protocol","Presentation protocol","Application protocol","Transport protocol"], correct: 2, explanation: "MQTT is an application layer protocol." },
+    { 
+        question: "Select the TRUE statement(s) for CoAP protocol?", 
+        type: 'multiple', 
+        options: [
+            "Uses GET message requests to retrieve subscription.",
+            "Uses PUT message requests to create subscription.",
+            "Uses PUSH message requests to create subscription.",
+            "Uses FETCH message requests to retrieve subscription."
+        ], 
+        correct: [0, 1], 
+        explanation: "CoAP uses GET for retrieval and PUT for creating/updating resources, similar to HTTP."
+        },
+        {
+        question: "CoAP Protocol is comprised of which sub-layers?", 
+        type: 'multiple', 
+        options: [
+            "Message",
+            "Observation",
+            "UDP",
+            "Request & Response"
+        ], 
+        correct: [0, 3], 
+        explanation: "CoAP consists of Message layer and Request/Response layer."
+        }
+];
+
 // ── TOPIC 2: Z-Wave & ZigBee ───────────────────────────────────────────────
 const zigbeeQuestions = [
     {
@@ -675,6 +732,7 @@ const zigbeeQuestions = [
 const allTopics = [
     { label: "Introduction to IoT",  short: "Intro to IoT",      questions: iotQuestions,    icon: "📡" },
     { label: "HTTP & REST",           short: "HTTP & REST",        questions: restQuestions,   icon: "🔗" },
+    { label: "CoAP & MQTT",       short: "CoAP & MQTT",   questions: CoAPMQTTQuestions, icon: "o0o" },
     { label: "Z-Wave & ZigBee",       short: "Z-Wave & ZigBee",   questions: zigbeeQuestions, icon: "📶" }
 ];
 
