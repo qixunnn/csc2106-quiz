@@ -430,14 +430,19 @@
                 <span class="nav-count" id="count-2">24</span>
             </button>
             <button class="nav-item" onclick="switchTopic(3)" id="nav-3">
-                <span class="nav-icon">📶</span>
-                Z-Wave &amp; ZigBee
-                <span class="nav-count" id="count-3">12</span>
+                <span class="nav-icon">🕸️</span>
+                Wireless Mesh
+                <span class="nav-count" id="count-3">17</span>
             </button>
             <button class="nav-item" onclick="switchTopic(4)" id="nav-4">
                 <span class="nav-icon">📻</span>
                 LoRa &amp; LoRaWAN
                 <span class="nav-count" id="count-4">16</span>
+            </button>
+            <button class="nav-item" onclick="switchTopic(5)" id="nav-5">
+                <span class="nav-icon">📶</span>
+                Z-Wave &amp; ZigBee
+                <span class="nav-count" id="count-5">12</span>
             </button>
         </div>
 
@@ -457,8 +462,9 @@
             <button class="mobile-nav-btn active" onclick="switchTopic(0)" id="mnav-0">📡 Intro to IoT</button>
             <button class="mobile-nav-btn" onclick="switchTopic(1)" id="mnav-1">🔗 HTTP &amp; REST</button>
             <button class="mobile-nav-btn" onclick="switchTopic(2)" id="mnav-2">o0o CoAP &amp; MQTT</button>
-            <button class="mobile-nav-btn" onclick="switchTopic(3)" id="mnav-3">📶 Z-Wave &amp; ZigBee</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(3)" id="mnav-3">🕸️ Wireless Mesh</button>
             <button class="mobile-nav-btn" onclick="switchTopic(4)" id="mnav-4">📻 LoRa &amp; LoRaWAN</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(5)" id="mnav-5">📶 Z-Wave &amp; ZigBee</button>
             <button class="mobile-nav-btn" onclick="checkAnswers()">⚡ Check</button>
             <button class="mobile-nav-btn" onclick="shuffleQuestions()">🔀 Shuffle</button>
             <button class="mobile-nav-btn" onclick="toggleAnswers()">💡 Answers</button>
@@ -755,12 +761,211 @@ const loraQuestions = [
 ];
 
 // ── ALL TOPICS ─────────────────────────────────────────────────────────────
+const meshQuestions = [
+    {
+        question: "In a distributed mesh network, how are routes between nodes established?",
+        type: 'single',
+        options: [
+            "Using a single, static route",
+            "Through a central authority",
+            "All communication goes through a master node",
+            "Nodes communicate to determine adjacency and routes"
+        ],
+        correct: 3,
+        explanation: "In a distributed mesh network, nodes communicate with each other to determine adjacency and establish routes dynamically — there is no central authority or master node."
+    },
+    {
+        question: "Which of the following is <strong>not</strong> a proactive mesh routing algorithm? (Select all that apply)",
+        type: 'multiple',
+        options: [
+            "Ad hoc On-Demand Distance Vector",
+            "Wireless Routing Protocol",
+            "Temporally-Ordered Routing Algorithm",
+            "Dynamic Source Routing",
+            "Destination-Sequenced Distance Vector",
+            "Better Approach To Mobile Adhoc Networking",
+            "Optimized Link State Routing"
+        ],
+        correct: [0, 2, 3],
+        explanation: "AODV, TORA, and DSR are reactive (on-demand) routing algorithms, not proactive. WRP, DSDV, BATMAN, and OLSR are proactive protocols that maintain routing tables continuously."
+    },
+    {
+        question: "What is a disadvantage of simple flooding in mesh networks?",
+        type: 'single',
+        options: [
+            "It generates a large number of redundant messages",
+            "Maximum use of battery power",
+            "Lack of data security",
+            "It is too simple to implement"
+        ],
+        correct: 0,
+        explanation: "Simple flooding broadcasts every packet to all neighbors, resulting in a large number of redundant messages and significant network overhead."
+    },
+    {
+        question: "Which flooding algorithm divides the network into subnets for routing?",
+        type: 'single',
+        options: [
+            "Reduced Flooding",
+            "Selective Flooding",
+            "Simple Flooding",
+            "Adaptive Flooding"
+        ],
+        correct: 0,
+        explanation: "Reduced Flooding divides the network into subnets, limiting the scope of broadcasts and reducing redundant transmissions across the whole network."
+    },
+    {
+        question: "In the context of mesh networks, what does the term 'self-healing' refer to?",
+        type: 'single',
+        options: [
+            "Healing of hardware issues without human intervention",
+            "The ability to manually repair physical damage",
+            "The network's ability to automatically reroute data if a node fails",
+            "The process of adding new nodes to the network"
+        ],
+        correct: 2,
+        explanation: "Self-healing in mesh networks means the network can automatically detect a failed node and reroute data through alternative paths without human intervention."
+    },
+    {
+        question: "What is a typical method to prevent malicious nodes from joining a wireless mesh network?",
+        type: 'single',
+        options: [
+            "Redundancy",
+            "Authentication",
+            "Decreasing signal strength",
+            "Ignoring new nodes"
+        ],
+        correct: 1,
+        explanation: "Authentication is used to verify the identity of nodes before they are allowed to join the network, preventing malicious or unauthorized nodes from participating."
+    },
+    {
+        question: "What does Adaptive Flooding adjust based on?",
+        type: 'single',
+        options: [
+            "The time of day",
+            "Network conditions and resource availability",
+            "Static configurations",
+            "Number of connected nodes"
+        ],
+        correct: 1,
+        explanation: "Adaptive Flooding dynamically adjusts its behavior based on current network conditions and resource availability, making it more efficient than simple or selective flooding."
+    },
+    {
+        question: "Which is <strong>not</strong> a challenge mentioned for wireless mesh networks?",
+        type: 'single',
+        options: [
+            "Interference and reliability",
+            "Timing and synchronization",
+            "Unlimited bandwidth",
+            "Bandwidth allocation"
+        ],
+        correct: 2,
+        explanation: "Unlimited bandwidth is not a challenge — it's actually the opposite. Bandwidth is a limited resource in wireless mesh networks, making its allocation a real challenge."
+    },
+    {
+        question: "Dynamic Source Routing can have multiple routes per destination.",
+        type: 'single',
+        options: ["True", "False"],
+        correct: 0,
+        explanation: "True. DSR maintains a route cache that can store multiple routes to the same destination, allowing it to select an alternative route if the primary route fails."
+    },
+    {
+        question: "What is a disadvantage of simple flooding in mesh networks?",
+        type: 'single',
+        options: [
+            "Maximum use of battery power",
+            "It generates a large number of redundant messages",
+            "Lack of data security",
+            "It is too simple to implement"
+        ],
+        correct: 1,
+        explanation: "Simple flooding's main disadvantage is generating a large number of redundant messages, as every node rebroadcasts every received packet to all its neighbors."
+    },
+    {
+        question: "The Optimized Link State Routing (OLSR) protocol uses ______ to optimize transmission.",
+        type: 'single',
+        options: [
+            "No relays",
+            "Single point relays",
+            "Dual point relays",
+            "Multipoint relays"
+        ],
+        correct: 3,
+        explanation: "OLSR uses Multipoint Relays (MPRs) — a selected subset of neighboring nodes — to forward broadcast messages, significantly reducing redundant transmissions."
+    },
+    {
+        question: "In a distributed mesh network, how are routes between nodes established?",
+        type: 'single',
+        options: [
+            "Nodes communicate to determine adjacency and routes",
+            "Using a single, static route",
+            "All communication goes through a master node",
+            "Through a central authority"
+        ],
+        correct: 0,
+        explanation: "Nodes communicate with each other to dynamically determine adjacency and establish routes, which is the core principle of distributed mesh networking."
+    },
+    {
+        question: "Which of the following is <strong>not</strong> a reactive mesh routing algorithm? (Select all that apply)",
+        type: 'multiple',
+        options: [
+            "Better Approach To Mobile Adhoc Networking",
+            "Ad hoc On-Demand Distance Vector",
+            "Destination-Sequenced Distance Vector",
+            "Optimized Link State Routing",
+            "Dynamic Source Routing",
+            "Temporally-Ordered Routing Algorithm",
+            "Wireless Routing Protocol"
+        ],
+        correct: [0, 2, 3, 6],
+        explanation: "BATMAN, DSDV, OLSR, and WRP are proactive (table-driven) protocols, not reactive. AODV, DSR, and TORA are the reactive protocols that discover routes on demand."
+    },
+    {
+        question: "Which characteristic is <strong>not</strong> a feature of wireless mesh networking?",
+        type: 'single',
+        options: [
+            "Scalability",
+            "Centralized architecture",
+            "Efficient data routing",
+            "Self-healing"
+        ],
+        correct: 1,
+        explanation: "Wireless mesh networks use a decentralized architecture, not centralized. Scalability, efficient data routing, and self-healing are all genuine features of mesh networks."
+    },
+    {
+        question: "Dynamic Source Routing can have multiple routes per destination.",
+        type: 'single',
+        options: ["True", "False"],
+        correct: 0,
+        explanation: "True. DSR's route cache can store multiple paths to the same destination, providing route diversity and resilience."
+    },
+    {
+        question: "What is the primary feature of a wireless mesh network?",
+        type: 'single',
+        options: [
+            "Limited to indoor use only",
+            "Centralized architecture",
+            "Decentralized architecture",
+            "Single-hop communication"
+        ],
+        correct: 2,
+        explanation: "The primary feature of a wireless mesh network is its decentralized architecture, where every node can communicate directly with multiple other nodes without relying on a central hub."
+    },
+    {
+        question: "Optimized Link State Routing Protocol uses triggered updates of their routing table whenever there is a topology change.",
+        type: 'single',
+        options: ["True", "False"],
+        correct: 1,
+        explanation: "False. OLSR is a proactive protocol that sends periodic Hello and TC (Topology Control) messages to maintain up-to-date routing tables — it does not rely solely on triggered updates."
+    }
+];
+
 const allTopics = [
     { label: "Introduction to IoT",  short: "Intro to IoT",      questions: iotQuestions,    icon: "📡" },
     { label: "HTTP & REST",           short: "HTTP & REST",        questions: restQuestions,   icon: "🔗" },
     { label: "CoAP & MQTT",       short: "CoAP & MQTT",   questions: CoAPMQTTQuestions, icon: "o0o" },
-    { label: "Z-Wave & ZigBee",       short: "Z-Wave & ZigBee",   questions: zigbeeQuestions, icon: "📶" },
-    { label: "LoRa & LoRaWAN",        short: "LoRa & LoRaWAN",    questions: loraQuestions,   icon: "📻" }
+    { label: "Wireless Mesh",         short: "Wireless Mesh",      questions: meshQuestions,   icon: "🕸️" },
+    { label: "LoRa & LoRaWAN",        short: "LoRa & LoRaWAN",    questions: loraQuestions,   icon: "📻" },
+    { label: "Z-Wave & ZigBee",       short: "Z-Wave & ZigBee",   questions: zigbeeQuestions, icon: "📶" }
 ];
 
 let activeTopic = 0;
