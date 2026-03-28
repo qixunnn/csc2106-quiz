@@ -1187,7 +1187,6 @@ const aiotAndCloudQuestions = [
         explanation: "A key limitation of AIoT is that IoT devices often have limited processing power."
     }
 ];
-aiotAndCloudQuestions
 
 // ── CELLULAR IOT QUESTIONS ────────────────────────────────────────────────
 const cellularIoTQuestions = [
@@ -1447,6 +1446,11 @@ function renderQuiz() {
         const card = document.createElement('div');
         card.className = 'question-card';
         card.style.animationDelay = `${index * 0.04}s`;
+
+        // Show check button for both 'multiple' and 'match' types
+        const showCheckBtn = q.type === 'multiple' || q.type === 'match';
+        const checkBtnLabel = q.type === 'match' ? 'Check Matching' : 'Check Selection';
+
         card.innerHTML = `
             <div class="card-header">
                 <span class="q-badge">Q${index + 1}</span>
@@ -1455,7 +1459,7 @@ function renderQuiz() {
             </div>
             <div class="question-text">${q.question}</div>
             <div class="options" id="options-${index}"></div>
-            ${q.type === 'multiple' ? `<div class="btn-check-wrap"><button class="btn-check" onclick="checkSingleQuestion(${index})">Check Selection</button></div>` : ''}
+            ${showCheckBtn ? `<div class="btn-check-wrap"><button class="btn-check" onclick="checkSingleQuestion(${index})">${checkBtnLabel}</button></div>` : ''}
             <div class="answer-section" id="answer-${index}">
                 <div class="answer-label">💡 Explanation</div>
                 <div class="explanation">${q.explanation}</div>
@@ -1584,13 +1588,30 @@ function markStatus(qi, cls) {
     el.textContent = cls === 'correct-q' ? '✓' : cls === 'wrong-q' ? '✗' : '•';
 }
 
-// ── CHECK SINGLE (multi-select) ───────────────────────────────────────────
+// ── CHECK SINGLE (multi-select AND match) ─────────────────────────────────
 function checkSingleQuestion(qi) {
     const q = currentQuestions[qi];
     const ua = userAnswers[qi];
+
+    if (q.type === 'match' || q.type === 'dropdown') {
+        // Check each dropdown row
+        let allCorrect = true;
+        q.items.forEach((item, ii) => {
+            const uv = ua?.[ii];
+            const dd = document.getElementById(`dropdown-${qi}-${ii}`);
+            const match = uv === item.correct;
+            dd?.classList.remove('correct', 'incorrect');
+            dd?.classList.add(match ? 'correct' : 'incorrect');
+            if (!match) allCorrect = false;
+        });
+        markStatus(qi, allCorrect ? 'correct-q' : 'wrong-q');
+        document.getElementById(`answer-${qi}`).classList.add('show');
+        return;
+    }
+
+    // multi-select path (unchanged)
     const ca = q.correct;
     const inputs = document.querySelectorAll(`input[name="q${qi}"]`);
-
     inputs.forEach((inp, oi) => {
         inp.parentElement.classList.remove('correct','incorrect');
         setBullet(qi, oi, 'default');
