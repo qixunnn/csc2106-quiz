@@ -440,24 +440,29 @@
                 <span class="nav-count" id="count-4">16</span>
             </button>
             <button class="nav-item" onclick="switchTopic(5)" id="nav-5">
-                <span class="nav-icon">📶</span>
-                Z-Wave &amp; ZigBee
-                <span class="nav-count" id="count-5">12</span>
+                <span class="nav-icon">🔵</span>
+                Bluetooth
+                <span class="nav-count" id="count-5">21</span>
             </button>
             <button class="nav-item" onclick="switchTopic(6)" id="nav-6">
-                <span class="nav-icon">☁️</span>
-                AIoT &amp; Cloud
-                <span class="nav-count" id="count-6">14</span>
+                <span class="nav-icon">📶</span>
+                Z-Wave &amp; ZigBee
+                <span class="nav-count" id="count-6">12</span>
             </button>
             <button class="nav-item" onclick="switchTopic(7)" id="nav-7">
-                <span class="nav-icon">📱</span>
-                Cellular IoT
-                <span class="nav-count" id="count-7">21</span>
+                <span class="nav-icon">☁️</span>
+                AIoT &amp; Cloud
+                <span class="nav-count" id="count-7">14</span>
             </button>
             <button class="nav-item" onclick="switchTopic(8)" id="nav-8">
+                <span class="nav-icon">📱</span>
+                Cellular IoT
+                <span class="nav-count" id="count-8">21</span>
+            </button>
+            <button class="nav-item" onclick="switchTopic(9)" id="nav-9">
                 <span class="nav-icon">🧩</span>
                 All Questions
-                <span class="nav-count" id="count-8">0</span>
+                <span class="nav-count" id="count-9">0</span>
             </button>
         </div>
 
@@ -479,10 +484,11 @@
             <button class="mobile-nav-btn" onclick="switchTopic(2)" id="mnav-2">🌐 CoAP &amp; MQTT</button>
             <button class="mobile-nav-btn" onclick="switchTopic(3)" id="mnav-3">🕸️ Wireless Mesh</button>
             <button class="mobile-nav-btn" onclick="switchTopic(4)" id="mnav-4">📻 LoRa &amp; LoRaWAN</button>
-            <button class="mobile-nav-btn" onclick="switchTopic(5)" id="mnav-5">📶 Z-Wave &amp; ZigBee</button>
-            <button class="mobile-nav-btn" onclick="switchTopic(6)" id="mnav-6">☁️ AIoT &amp; Cloud</button>
-            <button class="mobile-nav-btn" onclick="switchTopic(7)" id="mnav-7">📱 Cellular IoT</button>
-            <button class="mobile-nav-btn" onclick="switchTopic(8)" id="mnav-8">🧩 All Questions</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(5)" id="mnav-5">🔵 Bluetooth</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(6)" id="mnav-6">📶 Z-Wave &amp; ZigBee</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(7)" id="mnav-7">☁️ AIoT &amp; Cloud</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(8)" id="mnav-8">📱 Cellular IoT</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(9)" id="mnav-9">🧩 All Questions</button>
             <button class="mobile-nav-btn" onclick="checkAnswers()">⚡ Check</button>
             <button class="mobile-nav-btn" onclick="shuffleQuestions()">🔀 Shuffle</button>
             <button class="mobile-nav-btn" onclick="toggleAnswers()">💡 Answers</button>
@@ -1194,6 +1200,184 @@ const aiotAndCloudQuestions = [
     }
 ];
 
+const bluetoothQuestions = [
+    {
+        question: "What does BLE stand for?",
+        type: "single",
+        options: ["Bluetooth Long Engagement", "Bluetooth Low Efficiency", "Bluetooth Low Energy", "Basic Link Encryption"],
+        correct: 2,
+        explanation: "BLE stands for Bluetooth Low Energy."
+    },
+    {
+        question: "Which frequency band does BLE operate in?",
+        type: "single",
+        options: ["5.0 GHz", "868 MHz", "433 MHz", "2.4 GHz", "915 MHz"],
+        correct: 3,
+        explanation: "BLE operates in the 2.4 GHz ISM band."
+    },
+    {
+        question: "BLE is particularly designed for:",
+        type: "single",
+        options: ["Audio streaming.", "Long-distance communication.", "Short-range, low-power communication.", "High-speed data transfer."],
+        correct: 2,
+        explanation: "BLE is designed for short-range, low-power communication."
+    },
+    {
+        question: "What is the maximum data rate of latest BLE?",
+        type: "single",
+        options: ["4 Mbps", "2 Mbps", "3 Mbps", "1 Mbps"],
+        correct: 1,
+        explanation: "The expected answer is 2 Mbps."
+    },
+    {
+        question: "What is the range typically achievable with BLE technology?",
+        type: "single",
+        options: ["Up to 50 meters", "Up to 150 meters", "Up to 100 meters", "Up to 10 meters"],
+        correct: 2,
+        explanation: "The expected answer is up to 100 meters."
+    },
+    {
+        question: "In BLE, what is the role of a 'Central' device?",
+        type: "single",
+        options: [
+            "It only receives data.",
+            "It acts as an intermediary between two devices.",
+            "It broadcasts data to peripheral devices.",
+            "It connects to and controls peripheral devices."
+        ],
+        correct: 3,
+        explanation: "A Central device connects to and controls peripheral devices."
+    },
+    {
+        question: "What does 'Pairing' in BLE involve?",
+        type: "single",
+        options: [
+            "Adjusting the power level for optimal connection.",
+            "Connecting two devices for data transfer.",
+            "Broadcasting data to multiple devices.",
+            "Exchanging security keys for secure communication."
+        ],
+        correct: 3,
+        explanation: "Pairing involves exchanging security keys for secure communication."
+    },
+    {
+        question: "In BLE terminology, what is a 'GATT'?",
+        type: "single",
+        options: [
+            "Generic Authentication Transfer Tool",
+            "Generic Audio Transmission Technology",
+            "Generic Attribute Profile",
+            "Generic Access Transmission Technique"
+        ],
+        correct: 2,
+        explanation: "GATT stands for Generic Attribute Profile."
+    },
+    {
+        question: "What is a characteristic of BLE 'Advertising' mode?",
+        type: "single",
+        options: [
+            "Device discovery and connection establishment.",
+            "Secure data encryption.",
+            "High data transfer rate.",
+            "Long-range communication."
+        ],
+        correct: 0,
+        explanation: "BLE advertising mode is used for device discovery and connection establishment."
+    },
+    {
+        question: "Which of the following supports low energy radio operation?",
+        type: "single",
+        options: ["WiFi", "Bluetooth", "HaLow", "BLE"],
+        correct: 3,
+        explanation: "BLE is specifically designed for low-energy radio operation."
+    },
+    {
+        question: "BLE supports which kind of communication topology?",
+        type: "multiple",
+        options: ["Point-to-Point", "Mesh", "Star", "Bus"],
+        correct: [0, 1, 2],
+        explanation: "For your quiz set, the accepted answers are Point-to-Point, Mesh, and Star."
+    },
+    {
+        question: "Which of the following topology does Bluetooth 4.0 support?",
+        type: "multiple",
+        options: ["Scatter Net", "Mesh", "Ring", "Star"],
+        correct: [0, 3],
+        explanation: "Bluetooth 4.0 supports Scatter Net and Star."
+    },
+    {
+        question: "Which version of Bluetooth introduced BLE?",
+        type: "single",
+        options: ["Bluetooth 2.0", "Bluetooth 5.0", "Bluetooth 3.0", "Bluetooth 4.0"],
+        correct: 3,
+        explanation: "BLE was introduced in Bluetooth 4.0."
+    },
+    {
+        question: "Assume Bob can send 300 bits in one slot while using Bluetooth. How many slots does it take to send 600 bits?",
+        type: "single",
+        options: ["1", "2", "3", "5"],
+        correct: 2,
+        explanation: "For your quiz logic, the accepted answer is 3 slots."
+    },
+    {
+        question: "Assume Bob can send 300 bits in one slot while using Bluetooth. How many slots does it take to send 1200 bits?",
+        type: "single",
+        options: ["2", "3", "4", "5"],
+        correct: 3,
+        explanation: "For your quiz logic, the accepted answer is 5 slots."
+    },
+    {
+        question: "If the hopping time, assuming FHSS, is equal to 500μs, how many times would the signal hop in one second?",
+        type: "single",
+        options: ["1750", "2500", "1500", "2250", "2000"],
+        correct: 4,
+        explanation: "Using the given value: 1,000,000 / 500 = 2000."
+    },
+    {
+        question: "If the bandwidth of the spread spectrum signal is 180MHz and the signal bandwidth is 15MHz, how many carrier frequencies are required for generating the spread spectrum signal?",
+        type: "single",
+        options: ["10", "12", "15", "18"],
+        correct: 1,
+        explanation: "Carrier frequencies = 180 / 15 = 12."
+    },
+    {
+        question: "If the number of carrier frequencies is equal to 25, how many output bits must be generated by the PRN generator? (Assume FHSS)",
+        type: "single",
+        options: ["4 bits", "5 bits", "6 bits", "25 bits"],
+        correct: 1,
+        explanation: "Since 2^4 = 16 and 2^5 = 32, 5 bits are needed."
+    },
+    {
+        question: "Which of the following scheme is used by Bluetooth?",
+        type: "single",
+        options: [
+            "DSSS TDD scheme",
+            "ABCDEFG scheme",
+            "Frequency hopping TDD scheme",
+            "Frequency hopping FDD scheme",
+            "VWXYZ scheme",
+            "Pyramid scheme",
+            "DSSS FDD scheme"
+        ],
+        correct: 2,
+        explanation: "Bluetooth uses frequency hopping TDD scheme."
+    },
+    {
+        question: "Which feature distinguishes BLE from Classic Bluetooth?",
+        type: "single",
+        options: ["Lower energy consumption.", "Longer range.", "Higher data transfer rates.", "Better audio quality."],
+        correct: 0,
+        explanation: "BLE is distinguished from Classic Bluetooth by its lower energy consumption."
+    },
+    {
+        question: "Bluetooth is designed for short broadcast. There are forty 2-MHz channels. How many of these channels are reserved for advertising?",
+        type: "single",
+        options: ["1", "2", "3", "4"],
+        correct: 2,
+        explanation: "BLE uses 3 advertising channels."
+    }
+];
+
 // ── CELLULAR IOT QUESTIONS ────────────────────────────────────────────────
 const cellularIoTQuestions = [
     {
@@ -1389,13 +1573,14 @@ const cellularIoTQuestions = [
 
 const allTopics = [
     { label: "Introduction to IoT",  short: "Intro to IoT",      questions: iotQuestions,          icon: "📡" },
-    { label: "HTTP & REST",          short: "HTTP & REST",        questions: restQuestions,          icon: "🔗" },
-    { label: "CoAP & MQTT",          short: "CoAP & MQTT",        questions: CoAPMQTTQuestions,      icon: "🌐" },
-    { label: "Wireless Mesh",        short: "Wireless Mesh",      questions: meshQuestions,          icon: "🕸️" },
-    { label: "LoRa & LoRaWAN",       short: "LoRa & LoRaWAN",    questions: loraQuestions,          icon: "📻" },
-    { label: "Z-Wave & ZigBee",      short: "Z-Wave & ZigBee",   questions: zigbeeQuestions,        icon: "📶" },
-    { label: "AIoT & Cloud",         short: "AIoT & Cloud",       questions: aiotAndCloudQuestions,  icon: "☁️" },
-    { label: "Cellular IoT",         short: "Cellular IoT",       questions: cellularIoTQuestions,   icon: "📱" }
+    { label: "HTTP & REST",          short: "HTTP & REST",       questions: restQuestions,         icon: "🔗" },
+    { label: "CoAP & MQTT",          short: "CoAP & MQTT",       questions: CoAPMQTTQuestions,     icon: "🌐" },
+    { label: "Wireless Mesh",        short: "Wireless Mesh",     questions: meshQuestions,         icon: "🕸️" },
+    { label: "LoRa & LoRaWAN",       short: "LoRa & LoRaWAN",    questions: loraQuestions,         icon: "📻" },
+    { label: "Bluetooth",            short: "Bluetooth",         questions: bluetoothQuestions,    icon: "🔵" },
+    { label: "Z-Wave & ZigBee",      short: "Z-Wave & ZigBee",   questions: zigbeeQuestions,       icon: "📶" },
+    { label: "AIoT & Cloud",         short: "AIoT & Cloud",      questions: aiotAndCloudQuestions, icon: "☁️" },
+    { label: "Cellular IoT",         short: "Cellular IoT",      questions: cellularIoTQuestions,  icon: "📱" }
 ];
 
 const allTab = {
