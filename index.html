@@ -454,6 +454,11 @@
                 Cellular IoT
                 <span class="nav-count" id="count-7">21</span>
             </button>
+            <button class="nav-item" onclick="switchTopic(8)" id="nav-8">
+                <span class="nav-icon">🧩</span>
+                All Questions
+                <span class="nav-count" id="count-8">0</span>
+            </button>
         </div>
 
         <div class="sidebar-footer">
@@ -477,6 +482,7 @@
             <button class="mobile-nav-btn" onclick="switchTopic(5)" id="mnav-5">📶 Z-Wave &amp; ZigBee</button>
             <button class="mobile-nav-btn" onclick="switchTopic(6)" id="mnav-6">☁️ AIoT &amp; Cloud</button>
             <button class="mobile-nav-btn" onclick="switchTopic(7)" id="mnav-7">📱 Cellular IoT</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(8)" id="mnav-8">🧩 All Questions</button>
             <button class="mobile-nav-btn" onclick="checkAnswers()">⚡ Check</button>
             <button class="mobile-nav-btn" onclick="shuffleQuestions()">🔀 Shuffle</button>
             <button class="mobile-nav-btn" onclick="toggleAnswers()">💡 Answers</button>
@@ -1392,30 +1398,125 @@ const allTopics = [
     { label: "Cellular IoT",         short: "Cellular IoT",       questions: cellularIoTQuestions,   icon: "📱" }
 ];
 
+const allTab = {
+    label: "All Questions",
+    short: "All Questions",
+    icon: "🧩"
+};
+
+function cloneQuestion(q) {
+    return {
+        ...q,
+        options: Array.isArray(q.options) ? [...q.options] : q.options,
+        correct: Array.isArray(q.correct) ? [...q.correct] : q.correct,
+        items: Array.isArray(q.items)
+            ? q.items.map(item => ({
+                ...item,
+                descriptions: Array.isArray(item.descriptions) ? [...item.descriptions] : item.descriptions
+            }))
+            : q.items
+    };
+}
+
+function getQuestionsForTopic(idx) {
+    if (idx === allTopics.length) {
+        return allTopics.flatMap(topic => topic.questions).map(cloneQuestion);
+    }
+    return allTopics[idx].questions.map(cloneQuestion);
+}
+
+function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function shuffleArrayDifferent(arr) {
+    if (!Array.isArray(arr) || arr.length < 2) return arr;
+    const original = [...arr];
+    let attempts = 0;
+    do {
+        shuffleArray(arr);
+        attempts++;
+    } while (attempts < 6 && arr.every((v, i) => v === original[i]));
+    return arr;
+}
+
+function shuffleOptionsWithAnswers(q) {
+    if (!Array.isArray(q.options) || q.options.length < 2) return q;
+
+    const paired = q.options.map((opt, oldIndex) => ({ opt, oldIndex }));
+    shuffleArrayDifferent(paired);
+    q.options = paired.map(p => p.opt);
+
+    if (typeof q.correct === 'number') {
+        q.correct = paired.findIndex(p => p.oldIndex === q.correct);
+    } else if (Array.isArray(q.correct)) {
+        const indexMap = new Map(paired.map((p, newIndex) => [p.oldIndex, newIndex]));
+        q.correct = q.correct.map(oldIndex => indexMap.get(oldIndex)).sort((a, b) => a - b);
+    }
+    return q;
+}
+
+function shuffleDropdownAndMatch(q) {
+    if (!Array.isArray(q.items) || q.items.length < 1) return q;
+
+    if (q.type === 'dropdown' || q.type === 'match') {
+        if (q.items.length > 1) shuffleArrayDifferent(q.items);
+    }
+
+    if (q.type === 'match') {
+        q.items.forEach(item => {
+            if (!Array.isArray(item.descriptions) || item.descriptions.length < 2) return;
+
+            const paired = item.descriptions.map((desc, oldIndex) => ({ desc, oldIndex }));
+            shuffleArrayDifferent(paired);
+            item.descriptions = paired.map(p => p.desc);
+
+            // match dropdown values are 1-based
+            if (typeof item.correct === 'number') {
+                item.correct = paired.findIndex(p => p.oldIndex === (item.correct - 1)) + 1;
+            }
+        });
+    }
+
+    return q;
+}
+
+function getTopicLabel(idx) {
+    return idx === allTopics.length ? allTab.label : allTopics[idx].label;
+}
+
 let activeTopic = 0;
 let userAnswers  = [];
 let showingAnswers = false;
-let currentQuestions = [...iotQuestions];
+let currentQuestions = getQuestionsForTopic(0);
 
 // Update sidebar counts
 allTopics.forEach((t, i) => {
     const el = document.getElementById(`count-${i}`);
     if (el) el.textContent = t.questions.length;
 });
+const allCountEl = document.getElementById(`count-${allTopics.length}`);
+if (allCountEl) {
+    allCountEl.textContent = allTopics.reduce((sum, t) => sum + t.questions.length, 0);
+}
 
 // ── TOPIC SWITCH ──────────────────────────────────────────────────────────
 function switchTopic(idx) {
     activeTopic = idx;
-    currentQuestions = [...allTopics[idx].questions];
+    currentQuestions = getQuestionsForTopic(idx);
     showingAnswers = false;
     hidScore();
 
     document.querySelectorAll('.nav-item').forEach((el, i) => el.classList.toggle('active', i === idx));
-    for (let i = 0; i < allTopics.length; i++) {
+    for (let i = 0; i <= allTopics.length; i++) {
         document.getElementById(`mnav-${i}`)?.classList.toggle('active', i === idx);
     }
 
-    document.getElementById('topbar-title').textContent = allTopics[idx].label;
+    document.getElementById('topbar-title').textContent = getTopicLabel(idx);
     renderQuiz();
 }
 
@@ -1447,9 +1548,10 @@ function renderQuiz() {
         card.className = 'question-card';
         card.style.animationDelay = `${index * 0.04}s`;
 
-        // Show check button for both 'multiple' and 'match' types
-        const showCheckBtn = q.type === 'multiple' || q.type === 'match';
-        const checkBtnLabel = q.type === 'match' ? 'Check Matching' : 'Check Selection';
+        const showCheckBtn = q.type === 'multiple' || q.type === 'match' || q.type === 'dropdown';
+        let checkBtnLabel = 'Check Selection';
+        if (q.type === 'match') checkBtnLabel = 'Check Matching';
+        if (q.type === 'dropdown') checkBtnLabel = 'Check Order';
 
         card.innerHTML = `
             <div class="card-header">
@@ -1714,7 +1816,10 @@ function toggleAnswers() {
 
 // ── SHUFFLE ───────────────────────────────────────────────────────────────
 function shuffleQuestions() {
-    currentQuestions = [...allTopics[activeTopic].questions].sort(() => Math.random() - 0.5);
+    currentQuestions = getQuestionsForTopic(activeTopic);
+    currentQuestions.forEach(shuffleOptionsWithAnswers);
+    currentQuestions.forEach(shuffleDropdownAndMatch);
+    shuffleArrayDifferent(currentQuestions);
     hidScore();
     showingAnswers = false;
     renderQuiz();
