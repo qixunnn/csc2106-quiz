@@ -444,6 +444,11 @@
                 Z-Wave &amp; ZigBee
                 <span class="nav-count" id="count-5">12</span>
             </button>
+            <button class="nav-item" onclick="switchTopic(6)" id="nav-6">
+                <span class="nav-icon">☁️</span>
+                AIoT &amp; Cloud
+                <span class="nav-count" id="count-6">14</span>
+            </button>
         </div>
 
         <div class="sidebar-footer">
@@ -465,6 +470,7 @@
             <button class="mobile-nav-btn" onclick="switchTopic(3)" id="mnav-3">🕸️ Wireless Mesh</button>
             <button class="mobile-nav-btn" onclick="switchTopic(4)" id="mnav-4">📻 LoRa &amp; LoRaWAN</button>
             <button class="mobile-nav-btn" onclick="switchTopic(5)" id="mnav-5">📶 Z-Wave &amp; ZigBee</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(6)" id="mnav-6">☁️ AIoT &amp; Cloud</button>
             <button class="mobile-nav-btn" onclick="checkAnswers()">⚡ Check</button>
             <button class="mobile-nav-btn" onclick="shuffleQuestions()">🔀 Shuffle</button>
             <button class="mobile-nav-btn" onclick="toggleAnswers()">💡 Answers</button>
@@ -958,14 +964,233 @@ const meshQuestions = [
         explanation: "False. OLSR is a proactive protocol that sends periodic Hello and TC (Topology Control) messages to maintain up-to-date routing tables — it does not rely solely on triggered updates."
     }
 ];
+//aiotclound
+const aiotAndCloudQuestions = [
+    {
+        question: "AIoT stands for?",
+        type: 'single',
+        options: ["Advanced IoT", "Artificial Internet of Things", "Artificial Intelligence on IoT", "Artificial Intelligence of Things"],
+        correct: 3,
+        explanation: "AIoT stands for Artificial Intelligence of Things."
+    },
+    {
+        question: "Which of the following is not a potential use case for AIoT in industrial automation?",
+        type: 'single',
+        options: ["Inventory management", "Quality control", "Predictive maintenance", "Employee time tracking"],
+        correct: 3,
+        explanation: "Employee time tracking is not a typical AIoT industrial automation use case compared to inventory management, quality control, and predictive maintenance."
+    },
+    {
+        question: "IIoT stands for Industrial IoT.",
+        type: 'single',
+        options: ["True", "False"],
+        correct: 0,
+        explanation: "IIoT stands for Industrial Internet of Things."
+    },
+    {
+        question: "What is the purpose of AIoT?",
+        type: 'single',
+        options: ["To replace IoT devices with AI-powered devices", "To create a secure network for IoT devices", "To integrate artificial intelligence with the internet of things", "To improve the design of IoT devices"],
+        correct: 2,
+        explanation: "The purpose of AIoT is to integrate artificial intelligence with IoT to make systems smarter and more autonomous."
+    },
+    {
+        question: "Which of the following is not a benefit of AIoT? (pick the best answer)",
+        type: 'single',
+        options: ["Increased productivity", "Enhanced security", "Improved energy efficiency", "Decreased complexity"],
+        correct: 3,
+        explanation: "AIoT often increases system complexity rather than decreasing it."
+    },
+    {
+        question: "Based on the lecture, which of the following is NOT an advantage of Cloud Computing?",
+        type: 'single',
+        options: ["Virtualization", "Management", "Resilient", "Integration"],
+        correct: 3,
+        explanation: "Virtualization, management, and resilience are typical cloud advantages. Integration is not listed here as a core advantage."
+    },
+    {
+        question: "Which of the following is NOT an advantage of Edge Computing?",
+        type: 'single',
+        options: ["Low investment cost", "Reduces Network Bandwidth Requirements", "Significantly reduced data storage requirements", "Faster response time"],
+        correct: 0,
+        explanation: "Edge computing usually requires higher deployment cost, so low investment cost is not an advantage."
+    },
+    {
+        question: "Match the following services to the components that are NOT managed by the Cloud operator (e.g. Microsoft).",
+        type: 'match',
+        items: [
+            {
+                name: "On Premises",
+                correct: 1,
+                descriptions: [
+                    "1. Networking, Storage, Servers, Virtualization, OS, Middleware, Runtime, Data and Applications.",
+                    "2. OS, Middleware, Runtime, Data and Applications.",
+                    "3. Data and Applications.",
+                    "4. Nil"
+                ]
+            },
+            {
+                name: "IaaS",
+                correct: 2,
+                descriptions: [
+                    "1. Networking, Storage, Servers, Virtualization, OS, Middleware, Runtime, Data and Applications.",
+                    "2. OS, Middleware, Runtime, Data and Applications.",
+                    "3. Data and Applications.",
+                    "4. Nil"
+                ]
+            },
+            {
+                name: "PaaS",
+                correct: 3,
+                descriptions: [
+                    "1. Networking, Storage, Servers, Virtualization, OS, Middleware, Runtime, Data and Applications.",
+                    "2. OS, Middleware, Runtime, Data and Applications.",
+                    "3. Data and Applications.",
+                    "4. Nil"
+                ]
+            },
+            {
+                name: "SaaS",
+                correct: 4,
+                descriptions: [
+                    "1. Networking, Storage, Servers, Virtualization, OS, Middleware, Runtime, Data and Applications.",
+                    "2. OS, Middleware, Runtime, Data and Applications.",
+                    "3. Data and Applications.",
+                    "4. Nil"
+                ]
+            }
+        ],
+        explanation: "On Premises: user manages everything. IaaS: user manages OS onward. PaaS: user manages only data and applications. SaaS: cloud operator manages everything."
+    },
+    {
+        question: "Match the Edge computing platforms to how they perform inferencing on the device.",
+        type: 'match',
+        items: [
+            {
+                name: "CPU-centric",
+                correct: 1,
+                descriptions: [
+                    "1. Raspberry Pi",
+                    "2. NVidia Jetson"
+                ]
+            },
+            {
+                name: "GPU-centric",
+                correct: 2,
+                descriptions: [
+                    "1. Raspberry Pi",
+                    "2. NVidia Jetson"
+                ]
+            }
+        ],
+        explanation: "Raspberry Pi is CPU-centric, while NVidia Jetson is GPU-centric."
+    },
+    {
+        question: "Which of the following is a good example of an AIoT application?",
+        type: 'single',
+        options: [
+            "A smart home thermostat that learns your preferences over time",
+            "A wearable device that tracks your steps and calories burned",
+            "A wireless security camera that sends alerts to your smartphone",
+            "A fitness tracker that monitors your heart rate and sleep patterns"
+        ],
+        correct: 0,
+        explanation: "A thermostat that learns user preferences combines AI with IoT, making it a good AIoT example."
+    },
+    {
+        question: "Which of the following is a benefit of cloud computing?",
+        type: 'single',
+        options: ["Limited scalability", "Higher upfront costs", "Lower maintenance costs", "Limited data accessibility"],
+        correct: 2,
+        explanation: "Cloud computing reduces maintenance overhead and cost compared to traditional infrastructure."
+    },
+    {
+        question: "Based on the lecture, which of the following is not a typical deployment challenge for Edge computing devices?",
+        type: 'single',
+        options: ["Sound proofing", "Waterproofing", "Power", "Thermal"],
+        correct: 0,
+        explanation: "Sound proofing is not a typical edge deployment challenge, unlike waterproofing, power, and thermal issues."
+    },
+    {
+        question: "What is Cloud Computing?",
+        type: 'single',
+        options: [
+            "It is a way to physically connect multiple computers together.",
+            "It is a way to protect data from unauthorized access.",
+            "It is a way to store data on your local computer.",
+            "It is a way to access software and services over the internet."
+        ],
+        correct: 3,
+        explanation: "Cloud computing provides access to computing services and software over the internet."
+    },
+    {
+        question: "What is the name of the cloud service model that provides access to software applications over the internet?",
+        type: 'single',
+        options: ["Function as a Service (FaaS)", "Platform as a Service (PaaS)", "Infrastructure as a Service (IaaS)", "Software as a Service (SaaS)"],
+        correct: 3,
+        explanation: "SaaS provides software applications over the internet."
+    },
+    {
+        question: "Which of the following is NOT a Cloud Service Model?",
+        type: 'single',
+        options: ["Platform as a Service", "Infrastructure as a Service", "Virtualization as a Service", "Software as a Service"],
+        correct: 2,
+        explanation: "The main cloud service models are IaaS, PaaS, and SaaS."
+    },
+    {
+        question: "Which of the following statement is FALSE?",
+        type: 'single',
+        options: [
+            "Type 2 Hypervisor are also known as Bare metal hypervisor.",
+            "Type 2 Hypervisor use host OS.",
+            "Type 1 Hypervisor do not use host OS.",
+            "Type 1 Hypervisor are also known as Bare metal hypervisor."
+        ],
+        correct: 0,
+        explanation: "Type 1 hypervisors are bare metal hypervisors. Type 2 hypervisors run on top of a host OS."
+    },
+    {
+        question: "What is IaaS?",
+        type: 'single',
+        options: ["Interaction as a Service", "Infrastructure as a Service", "Intelligence as a Service", "Internet as a Service"],
+        correct: 1,
+        explanation: "IaaS stands for Infrastructure as a Service."
+    },
+    {
+        question: "Which of the following is TRUE about Fog Computing?",
+        type: 'multiple',
+        options: [
+            "Fog computing is a separate architecture that can replace cloud computing.",
+            "Cloud is a centralized system, while the fog is a distributed decentralized infrastructure.",
+            "Fog provides low latency.",
+            "Fog computing are located nearer to the Cloud computing."
+        ],
+        correct: [1, 2],
+        explanation: "Fog computing is decentralized and closer to edge devices, providing lower latency."
+    },
+    {
+        question: "Which of the following is a limitation of AIoT?",
+        type: 'single',
+        options: [
+            "It is limited by the processing power of IoT devices",
+            "It is only suitable for large-scale applications",
+            "It can be expensive to implement",
+            "It requires a high degree of technical expertise to implement"
+        ],
+        correct: 0,
+        explanation: "A key limitation of AIoT is that IoT devices often have limited processing power."
+    }
+];
+aiotAndCloudQuestions
 
 const allTopics = [
     { label: "Introduction to IoT",  short: "Intro to IoT",      questions: iotQuestions,    icon: "📡" },
     { label: "HTTP & REST",           short: "HTTP & REST",        questions: restQuestions,   icon: "🔗" },
-    { label: "CoAP & MQTT",       short: "CoAP & MQTT",   questions: CoAPMQTTQuestions, icon: "o0o" },
+    { label: "CoAP & MQTT",       short: "CoAP & MQTT",   questions: CoAPMQTTQuestions, icon: "🌐" },
     { label: "Wireless Mesh",         short: "Wireless Mesh",      questions: meshQuestions,   icon: "🕸️" },
     { label: "LoRa & LoRaWAN",        short: "LoRa & LoRaWAN",    questions: loraQuestions,   icon: "📻" },
-    { label: "Z-Wave & ZigBee",       short: "Z-Wave & ZigBee",   questions: zigbeeQuestions, icon: "📶" }
+    { label: "Z-Wave & ZigBee",       short: "Z-Wave & ZigBee",   questions: zigbeeQuestions, icon: "📶" },
+    { label: "AIoT & Cloud",       short: "AIoT & Cloud",   questions: aiotAndCloudQuestions, icon: "☁️" }
 ];
 
 let activeTopic = 0;
@@ -987,7 +1212,9 @@ function switchTopic(idx) {
     hidScore();
 
     document.querySelectorAll('.nav-item').forEach((el, i) => el.classList.toggle('active', i === idx));
-    document.querySelectorAll('.mobile-nav-btn').forEach((el, i) => { if (i < allTopics.length) el.classList.toggle('active', i === idx); });
+    for (let i = 0; i < allTopics.length; i++) {
+        document.getElementById(`mnav-${i}`)?.classList.toggle('active', i === idx);
+    }
 
     document.getElementById('topbar-title').textContent = allTopics[idx].label;
     renderQuiz();
