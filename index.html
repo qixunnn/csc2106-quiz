@@ -781,7 +781,21 @@ const loraQuestions = [
     { question: "LoRa's spreading factor affects which of the following?", type: 'single', options: ["Operating frequency","Power consumption only","Data rate and range","Modulation technique"], correct: 2, explanation: "The spreading factor directly controls the trade-off between data rate and range: higher SF = longer range, lower data rate." },
     { question: "Which Class of LoRaWAN is best suited for applications requiring minimal latency?", type: 'single', options: ["Class A","Class C","Class D","Class B"], correct: 1, explanation: "Class C devices listen almost continuously (only stopping to transmit), giving the lowest possible downlink latency of all LoRaWAN device classes." },
     { question: "What type of modulation is used in LoRa?", type: 'single', options: ["Amplitude Modulation (AM)","Phase-Shift Keying (PSK)","Frequency Shift Keying (FSK)","Chirp Spread Spectrum (CSS)"], correct: 3, explanation: "LoRa uses Chirp Spread Spectrum (CSS) modulation, where data is encoded using chirps — signals that sweep up or down in frequency." },
-    { question: "Link Budget ...", type: 'single', options: ["refers to the difference between the minimum expected power received at the receiver's end, and the receiver's sensitivity.","refers to the amount of loss that a data link (transmitter to receiver) can tolerate in order to operate properly.","refers to the amount of loss that a data link (transmitter to receiver) should have.","refers to a connection between two entities."], correct: 1, explanation: "Link budget represents the maximum allowable path loss a communication link can sustain while still operating correctly, accounting for transmit power, antenna gains, and all losses along the path." }
+    { question: "Link Budget ...", type: 'single', options: ["refers to the difference between the minimum expected power received at the receiver's end, and the receiver's sensitivity.","refers to the amount of loss that a data link (transmitter to receiver) can tolerate in order to operate properly.","refers to the amount of loss that a data link (transmitter to receiver) should have.","refers to a connection between two entities."], correct: 1, explanation: "Link budget represents the maximum allowable path loss a communication link can sustain while still operating correctly, accounting for transmit power, antenna gains, and all losses along the path." },
+    {
+        question: "What is the main advantages of using LoRa for IoT applications?",
+        type: 'multiple',
+        options: ["Long range", "Low power consumption", "Low data rate", "High data rate"],
+        correct: [0, 1],
+        explanation: "LoRa's main advantages are long range and low power consumption. Low data rate is a drawback, not an advantage."
+    },
+    {
+        question: "LoRaWAN modulation technique sits at which OSI layer?",
+        type: 'single',
+        options: ["Application", "Network", "Transport", "Presentation", "Datalink", "Session", "Physical"],
+        correct: 4,
+        explanation: "LoRaWAN operates at the Data Link layer (MAC layer). LoRa handles the Physical layer."
+    }
 ];
 
 // ── ALL TOPICS ─────────────────────────────────────────────────────────────
