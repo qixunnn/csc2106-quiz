@@ -549,16 +549,21 @@
                 <span class="nav-count" id="count-8">21</span>
             </button>
             <button class="nav-item" onclick="switchTopic(9)" id="nav-9">
+                <span class="nav-icon">📶</span>
+                WiFi &amp; HaLow
+                <span class="nav-count" id="count-9">19</span>
+            </button>
+            <button class="nav-item" onclick="switchTopic(10)" id="nav-10">
                 <span class="nav-icon">🧩</span>
                 All Questions
-                <span class="nav-count" id="count-9">0</span>
+                <span class="nav-count" id="count-10">0</span>
             </button>
 
             <div class="nav-label" style="margin-top:16px;">Other</div>
-            <button class="nav-item" onclick="switchTopic(10)" id="nav-10" style="color:#e03355;">
+            <button class="nav-item" onclick="switchTopic(11)" id="nav-11" style="color:#e03355;">
                 <span class="nav-icon">⚠️</span>
                 Disputed Qs
-                <span class="nav-count" id="count-10" style="background:rgba(224,51,85,0.10);color:#e03355;">5</span>
+                <span class="nav-count" id="count-11" style="background:rgba(224,51,85,0.10);color:#e03355;">5</span>
             </button>
         </div>
 
@@ -588,8 +593,9 @@
             <button class="mobile-nav-btn" onclick="switchTopic(6)" id="mnav-6">📶 Z-Wave &amp; ZigBee</button>
             <button class="mobile-nav-btn" onclick="switchTopic(7)" id="mnav-7">☁️ AIoT &amp; Cloud</button>
             <button class="mobile-nav-btn" onclick="switchTopic(8)" id="mnav-8">📱 Cellular IoT</button>
-            <button class="mobile-nav-btn" onclick="switchTopic(9)" id="mnav-9">🧩 All Questions</button>
-            <button class="mobile-nav-btn" onclick="switchTopic(10)" id="mnav-10" style="color:#e03355;border-color:rgba(224,51,85,0.3);">⚠️ Disputed</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(9)" id="mnav-9">📶 WiFi &amp; HaLow</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(10)" id="mnav-10">🧩 All Questions</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(11)" id="mnav-11" style="color:#e03355;border-color:rgba(224,51,85,0.3);">⚠️ Disputed</button>
             <button class="mobile-nav-btn" onclick="checkAnswers()">⚡ Check</button>
             <button class="mobile-nav-btn" onclick="shuffleQuestions()">🔀 Shuffle</button>
             <button class="mobile-nav-btn" onclick="toggleAnswers()">💡 Answers</button>
@@ -1655,6 +1661,211 @@ const cellularIoTQuestions = [
     }
 ];
 
+// ── WIFI & HALOW QUESTIONS ────────────────────────────────────────────────
+const wifiHalowQuestions = [
+    {
+        question: "Which of the following are advantages of using Relays in HaLow? (Select all that apply)",
+        type: 'multiple',
+        options: [
+            "Relays require the devices to transmit at a lower data rate thereby consuming low power.",
+            "When a relay is present, the devices do not require to exchange data with the Root Access point.",
+            "Relays enable the devices to transmit at high data rate.",
+            "Relays improve reliability of data transmission."
+        ],
+        correct: [2, 3],
+        explanation: "Relays in HaLow enable devices to transmit at higher data rates (since they don't need to reach the AP directly over long distances) and improve reliability by providing alternative paths. Relays do not eliminate the need to exchange data with the Root AP."
+    },
+    {
+        question: "Which of the following packets help in solving the hidden node problem in 802.11 networks? (Select all that apply)",
+        type: 'multiple',
+        options: [
+            "Request To Send Packet",
+            "Clear to Share Packet",
+            "Request to Share Packet",
+            "Acknowledgement Packets",
+            "Clear To Send Packet"
+        ],
+        correct: [0, 4],
+        explanation: "The RTS/CTS (Request To Send / Clear To Send) handshake mechanism in 802.11 solves the hidden node problem by reserving the channel before data transmission, alerting hidden nodes to defer."
+    },
+    {
+        question: "Which of the following frames use the Null Data Packet (NDP) MAC frame structure in 802.11ah? (Select all that apply)",
+        type: 'multiple',
+        options: [
+            "Beacons",
+            "ACK",
+            "CTS",
+            "RTS",
+            "PS-Poll Frame"
+        ],
+        correct: [1, 2, 3],
+        explanation: "In 802.11ah (HaLow), ACK, CTS, and RTS frames use the compact Null Data Packet (NDP) MAC frame structure to reduce overhead. Beacons and PS-Poll frames use the standard frame structure."
+    },
+    {
+        question: "Consider the following two statements and select the appropriate option below:<br><br><strong>Statement A:</strong> Centralized and Distributed Authentication Control are introduced in HaLow to overcome collisions between the devices in the network.<br><strong>Statement B:</strong> HaLow introduced mechanisms to limit the set of devices accessing the channel and to spread their access attempts over a long period of time.",
+        type: 'single',
+        options: [
+            "Both Statements are false.",
+            "Statement A is true, but Statement B is false.",
+            "Statements A and B are true.",
+            "Statement B is true, but Statement A is false."
+        ],
+        correct: 3,
+        explanation: "Statement B is true — HaLow introduced mechanisms like the Restricted Access Window (RAW) to limit which devices can access the channel at a given time and spread access attempts, reducing collisions. Statement A is false — Centralized/Distributed Authentication Control is about authentication, not collision avoidance."
+    },
+    {
+        question: "How does HaLow address the shortage of the Duration/ID field required for Network Allocation Vector?",
+        type: 'single',
+        options: [
+            "HaLow uses the Association ID for determining the length of the frame.",
+            "HaLow introduced the Restricted Access Window mechanism for the same.",
+            "HaLow uses a mechanism called Response Indication Deferral.",
+            "HaLow does not need any such mechanism as the length of the data payload is fixed."
+        ],
+        correct: 2,
+        explanation: "HaLow uses Response Indication Deferral (RID) to address the limitation of the Duration/ID field for the Network Allocation Vector (NAV), allowing neighboring stations to correctly defer access to the channel."
+    },
+    {
+        question: "The 'Data Unit' gets larger as it goes ______ the OSI stack.",
+        type: 'single',
+        options: ["Crisscross", "Across", "Up", "Down"],
+        correct: 3,
+        explanation: "As data moves down the OSI stack, each layer adds its own header (encapsulation), making the data unit progressively larger at each lower layer."
+    },
+    {
+        question: "All 802.11 devices are compatible with each other.",
+        type: 'single',
+        options: ["True", "False"],
+        correct: 1,
+        explanation: "False. While many 802.11 standards are backward compatible, not all 802.11 devices are compatible with each other. For example, 802.11ah (HaLow) operates at sub-1 GHz and is not compatible with standard 2.4/5 GHz 802.11 devices."
+    },
+    {
+        question: "How many non-overlapping WiFi channels are there for the 2.4GHz band?",
+        type: 'single',
+        options: ["12", "14", "3", "11"],
+        correct: 2,
+        explanation: "The 2.4GHz band has 14 channels total, but only 3 are non-overlapping (channels 1, 6, and 11). There are 11 channels available in most countries, but only 3 do not overlap with each other."
+    },
+    {
+        question: "Which channel access technique is used in HaLow?",
+        type: 'single',
+        options: [
+            "Carrier Sense Multiple Access with Collision Prevention",
+            "Carrier Sense Multiple Access with Collision Avoidance",
+            "Carrier Sense Multiple Access with Collision Anticipation",
+            "Carrier Sense Multiple Access with Collision Detection"
+        ],
+        correct: 1,
+        explanation: "HaLow (802.11ah) uses CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance), the same channel access mechanism used in all 802.11 Wi-Fi standards."
+    },
+    {
+        question: "Select the standards that are typically common across IEEE 802. (Select all that apply)",
+        type: 'multiple',
+        options: [
+            "802.1 Bridging",
+            "802.3 Ethernet",
+            "802.17 Resilient Packet Ring",
+            "802.2 Logical Link Control",
+            "802.16 WiMAX"
+        ],
+        correct: [0, 3],
+        explanation: "802.1 (Bridging) and 802.2 (Logical Link Control) are the common/foundational standards that apply across the IEEE 802 family. The others (Ethernet, RPR, WiMAX) are technology-specific working group standards."
+    },
+    {
+        question: "WiFi HaLow is also known as?",
+        type: 'single',
+        options: ["802.11ah", "802.11ac", "802.11ax", "802.11f"],
+        correct: 0,
+        explanation: "WiFi HaLow is the marketing name for IEEE 802.11ah, a low-power, long-range Wi-Fi standard operating in the sub-1 GHz frequency band."
+    },
+    {
+        question: "What are the main advantages of HaLow over traditional Wi-Fi technologies? (Select all that apply)",
+        type: 'multiple',
+        options: [
+            "Better security",
+            "Faster speeds",
+            "Greater range",
+            "Lower power consumption"
+        ],
+        correct: [2, 3],
+        explanation: "HaLow's key advantages over traditional Wi-Fi are its greater range (up to 1km) and lower power consumption, made possible by operating at sub-1 GHz frequencies. It does not offer faster speeds than modern Wi-Fi."
+    },
+    {
+        question: "Which of the frames are transmitted by the Access Point when a node is attempting to join a Basic Service Set using active scanning? (Select all that apply)",
+        type: 'multiple',
+        options: [
+            "Probe Request Frame",
+            "Association Response Frame",
+            "Association Request Frame",
+            "Probe Response Frame"
+        ],
+        correct: [1, 3],
+        explanation: "During active scanning, the station sends a Probe Request. The AP responds with a Probe Response. After authentication, the station sends an Association Request and the AP replies with an Association Response. So the AP transmits Probe Response and Association Response frames."
+    },
+    {
+        question: "Which of the following is included in the beacon to notify stations about buffered frames?",
+        type: 'single',
+        options: [
+            "Traffic Availability Map",
+            "Traffic Notification Map",
+            "Traffic Indication Map",
+            "Traffic Intimation Map"
+        ],
+        correct: 2,
+        explanation: "The Traffic Indication Map (TIM) is included in 802.11 beacons to notify power-saving stations which ones have buffered frames waiting for them at the AP."
+    },
+    {
+        question: "Which of the following power management modes are available for stations in 802.11 networks? (Select all that apply)",
+        type: 'multiple',
+        options: [
+            "Power Save Mode",
+            "Doze Mode",
+            "Awake Mode",
+            "Active Mode"
+        ],
+        correct: [0, 3],
+        explanation: "802.11 defines two power management modes for stations: Active Mode (device is always awake and listening) and Power Save Mode (device sleeps and wakes periodically to check for buffered frames)."
+    },
+    {
+        question: "Using which one of the following parameters will the modulation and coding scheme be decided?",
+        type: 'single',
+        options: [
+            "None of the options are correct.",
+            "Data Transmission Rate",
+            "Signal to Noise Ratio",
+            "Wireless Communication technique"
+        ],
+        correct: 2,
+        explanation: "The Modulation and Coding Scheme (MCS) is selected based on the Signal to Noise Ratio (SNR) at the receiver. A higher SNR allows higher-order modulation (e.g., 256-QAM), while a lower SNR requires more robust, lower-order schemes."
+    },
+    {
+        question: "Select the true statements for WiFi. (Select all that apply)",
+        type: 'multiple',
+        options: [
+            "Its frequency ranges from 5GHz to 5.15GHz",
+            "The 2.4GHz Band has a 150MHz bandwidth",
+            "Its frequency ranges from 2.4GHz to 2.5GHz",
+            "The 5GHz Band has a 150MHz bandwidth"
+        ],
+        correct: [2],
+        explanation: "Wi-Fi's 2.4GHz band spans from 2.4GHz to 2.5GHz (100MHz total bandwidth). The 5GHz band spans a much wider range (approximately 5.15GHz to 5.85GHz, giving ~700MHz). The 2.4GHz band does not have 150MHz bandwidth."
+    },
+    {
+        question: "What is the typical range of HaLow compared to traditional Wi-Fi?",
+        type: 'single',
+        options: ["Longer range", "Unlimited range", "Shorter range", "Same range"],
+        correct: 0,
+        explanation: "HaLow (802.11ah) operates at sub-1 GHz frequencies which provide significantly longer range (up to ~1km) compared to traditional 2.4GHz or 5GHz Wi-Fi, which typically covers tens to hundreds of metres."
+    },
+    {
+        question: "What is the operating frequency of HaLow?",
+        type: 'single',
+        options: ["5 GHz", "2.4 GHz", "Sub-1 GHz", "900 Hz"],
+        correct: 2,
+        explanation: "HaLow (802.11ah) operates in the sub-1 GHz frequency band (around 900 MHz in most regions). This lower frequency provides better penetration through walls and longer range compared to 2.4GHz or 5GHz Wi-Fi."
+    }
+];
+
 const allTopics = [
     { label: "Introduction to IoT",  short: "Intro to IoT",      questions: iotQuestions,          icon: "📡" },
     { label: "HTTP & REST",          short: "HTTP & REST",       questions: restQuestions,         icon: "🔗" },
@@ -1664,7 +1875,8 @@ const allTopics = [
     { label: "Bluetooth",            short: "Bluetooth",         questions: bluetoothQuestions,    icon: "🔵" },
     { label: "Z-Wave & ZigBee",      short: "Z-Wave & ZigBee",   questions: zigbeeQuestions,       icon: "📶" },
     { label: "AIoT & Cloud",         short: "AIoT & Cloud",      questions: aiotAndCloudQuestions, icon: "☁️" },
-    { label: "Cellular IoT",         short: "Cellular IoT",      questions: cellularIoTQuestions,  icon: "📱" }
+    { label: "Cellular IoT",         short: "Cellular IoT",      questions: cellularIoTQuestions,  icon: "📱" },
+    { label: "WiFi & HaLow",         short: "WiFi & HaLow",      questions: wifiHalowQuestions,    icon: "📶" }
 ];
 
 const allTab = {
@@ -1774,7 +1986,7 @@ if (allCountEl) {
 }
 
 // ── TOPIC SWITCH ──────────────────────────────────────────────────────────
-const DISPUTED_IDX = 10;
+const DISPUTED_IDX = 11;
 
 function switchTopic(idx) {
     activeTopic = idx;
