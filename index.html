@@ -787,43 +787,38 @@ const loraQuestions = [
 // ── ALL TOPICS ─────────────────────────────────────────────────────────────
 const meshQuestions = [
     {
-        question: "In a distributed mesh network, how are routes between nodes established?",
+        question: "Optimized Link State Routing Protocol uses triggered updates of their routing table whenever there is a topology change.",
         type: 'single',
-        options: [
-            "Using a single, static route",
-            "Through a central authority",
-            "All communication goes through a master node",
-            "Nodes communicate to determine adjacency and routes"
-        ],
-        correct: 3,
-        explanation: "In a distributed mesh network, nodes communicate with each other to determine adjacency and establish routes dynamically — there is no central authority or master node."
+        options: ["True", "False"],
+        correct: 1,
+        explanation: "False. OLSR is a proactive protocol that sends periodic Hello and TC (Topology Control) messages to maintain up-to-date routing tables — it does not rely solely on triggered updates."
     },
     {
         question: "Which of the following is <strong>not</strong> a proactive mesh routing algorithm? (Select all that apply)",
         type: 'multiple',
         options: [
-            "Ad hoc On-Demand Distance Vector",
-            "Wireless Routing Protocol",
-            "Temporally-Ordered Routing Algorithm",
-            "Dynamic Source Routing",
             "Destination-Sequenced Distance Vector",
+            "Optimized Link State Routing",
             "Better Approach To Mobile Adhoc Networking",
-            "Optimized Link State Routing"
+            "Ad hoc On-Demand Distance Vector",
+            "Dynamic Source Routing",
+            "Wireless Routing Protocol",
+            "Temporally-Ordered Routing Algorithm"
         ],
-        correct: [0, 2, 3],
-        explanation: "AODV, TORA, and DSR are reactive (on-demand) routing algorithms, not proactive. WRP, DSDV, BATMAN, and OLSR are proactive protocols that maintain routing tables continuously."
+        correct: [3, 4, 6],
+        explanation: "AODV, DSR, and TORA are reactive (on-demand) routing algorithms, not proactive. DSDV, OLSR, BATMAN, and WRP are proactive protocols that maintain routing tables continuously."
     },
     {
-        question: "What is a disadvantage of simple flooding in mesh networks?",
+        question: "What is the primary feature of a wireless mesh network?",
         type: 'single',
         options: [
-            "It generates a large number of redundant messages",
-            "Maximum use of battery power",
-            "Lack of data security",
-            "It is too simple to implement"
+            "Limited to indoor use only",
+            "Centralized architecture",
+            "Decentralized architecture",
+            "Single-hop communication"
         ],
-        correct: 0,
-        explanation: "Simple flooding broadcasts every packet to all neighbors, resulting in a large number of redundant messages and significant network overhead."
+        correct: 2,
+        explanation: "The primary feature of a wireless mesh network is its decentralized architecture, where every node can communicate directly with multiple other nodes without relying on a central hub."
     },
     {
         question: "Which flooding algorithm divides the network into subnets for routing?",
@@ -879,10 +874,10 @@ const meshQuestions = [
         options: [
             "Interference and reliability",
             "Timing and synchronization",
-            "Unlimited bandwidth",
-            "Bandwidth allocation"
+            "Bandwidth allocation",
+            "Unlimited bandwidth"
         ],
-        correct: 2,
+        correct: 3,
         explanation: "Unlimited bandwidth is not a challenge — it's actually the opposite. Bandwidth is a limited resource in wireless mesh networks, making its allocation a real challenge."
     },
     {
@@ -954,25 +949,6 @@ const meshQuestions = [
         ],
         correct: 1,
         explanation: "Wireless mesh networks use a decentralized architecture, not centralized. Scalability, efficient data routing, and self-healing are all genuine features of mesh networks."
-    },
-    {
-        question: "What is the primary feature of a wireless mesh network?",
-        type: 'single',
-        options: [
-            "Limited to indoor use only",
-            "Centralized architecture",
-            "Decentralized architecture",
-            "Single-hop communication"
-        ],
-        correct: 2,
-        explanation: "The primary feature of a wireless mesh network is its decentralized architecture, where every node can communicate directly with multiple other nodes without relying on a central hub."
-    },
-    {
-        question: "Optimized Link State Routing Protocol uses triggered updates of their routing table whenever there is a topology change.",
-        type: 'single',
-        options: ["True", "False"],
-        correct: 1,
-        explanation: "False. OLSR is a proactive protocol that sends periodic Hello and TC (Topology Control) messages to maintain up-to-date routing tables — it does not rely solely on triggered updates."
     }
 ];
 //aiotclound
