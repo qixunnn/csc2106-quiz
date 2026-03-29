@@ -399,6 +399,95 @@
             from { opacity: 0; transform: translateY(12px); }
             to   { opacity: 1; transform: translateY(0); }
         }
+        /* ── DISPUTED PANEL ───────────────────────────────────────────────── */
+        .disputed-panel {
+            padding: 24px 32px 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .disputed-intro {
+            background: rgba(224,51,85,0.06);
+            border: 1px solid rgba(224,51,85,0.25);
+            border-radius: 12px;
+            padding: 18px 22px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .disputed-intro-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+
+        .disputed-intro-body { flex: 1; }
+        .disputed-intro-body strong { display: block; font-size: 14px; font-weight: 600; color: var(--red); margin-bottom: 4px; }
+        .disputed-intro-body p { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+
+        .dq-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            border-left: 3px solid var(--red);
+            animation: fadeUp 0.3s ease both;
+        }
+
+        .dq-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 22px 0;
+        }
+
+        .dq-topic-badge {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.10em;
+            text-transform: uppercase;
+            color: var(--red);
+            background: var(--red-lo);
+            border: 1px solid rgba(224,51,85,0.25);
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        .dq-card-q {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.55;
+            padding: 12px 22px 14px;
+        }
+
+        .dq-answer-block {
+            margin: 0 22px 20px;
+            padding: 14px 16px;
+            background: rgba(0,229,255,0.05);
+            border: 1px solid rgba(0,229,255,0.18);
+            border-radius: 10px;
+        }
+
+        .dq-answer-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dq-answer-text {
+            font-size: 13px;
+            color: var(--text-dim);
+            line-height: 1.65;
+        }
+
+        .dq-answer-text strong { color: var(--text); font-weight: 600; }
+
+        @media (max-width: 768px) { .disputed-panel { padding: 16px 18px 40px; } }
     </style>
 </head>
 <body>
@@ -464,6 +553,13 @@
                 All Questions
                 <span class="nav-count" id="count-9">0</span>
             </button>
+
+            <div class="nav-label" style="margin-top:16px;">Other</div>
+            <button class="nav-item" onclick="switchTopic(10)" id="nav-10" style="color:#e03355;">
+                <span class="nav-icon">⚠️</span>
+                Disputed Qs
+                <span class="nav-count" id="count-10" style="background:rgba(224,51,85,0.10);color:#e03355;">5</span>
+            </button>
         </div>
 
         <div class="sidebar-footer">
@@ -471,6 +567,10 @@
             <button class="action-btn" onclick="shuffleQuestions()">🔀 Shuffle</button>
             <button class="action-btn" onclick="toggleAnswers()">💡 Toggle Answers</button>
             <button class="action-btn" onclick="resetQuiz()">↺ Reset</button>
+            <div style="margin-top:16px;padding:10px 4px 0;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted);line-height:1.7;">
+                <div style="font-weight:600;color:var(--text-dim);margin-bottom:4px;font-size:11px;">CSC2106 IoT Quiz</div>
+                Qi Xun · Jun Wei · Gerald<br>Yuki · Javier · Andy
+            </div>
         </div>
     </aside>
 
@@ -489,6 +589,7 @@
             <button class="mobile-nav-btn" onclick="switchTopic(7)" id="mnav-7">☁️ AIoT &amp; Cloud</button>
             <button class="mobile-nav-btn" onclick="switchTopic(8)" id="mnav-8">📱 Cellular IoT</button>
             <button class="mobile-nav-btn" onclick="switchTopic(9)" id="mnav-9">🧩 All Questions</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(10)" id="mnav-10" style="color:#e03355;border-color:rgba(224,51,85,0.3);">⚠️ Disputed</button>
             <button class="mobile-nav-btn" onclick="checkAnswers()">⚡ Check</button>
             <button class="mobile-nav-btn" onclick="shuffleQuestions()">🔀 Shuffle</button>
             <button class="mobile-nav-btn" onclick="toggleAnswers()">💡 Answers</button>
@@ -1673,17 +1774,28 @@ if (allCountEl) {
 }
 
 // ── TOPIC SWITCH ──────────────────────────────────────────────────────────
+const DISPUTED_IDX = 10;
+
 function switchTopic(idx) {
     activeTopic = idx;
-    currentQuestions = getQuestionsForTopic(idx);
     showingAnswers = false;
     hidScore();
 
     document.querySelectorAll('.nav-item').forEach((el, i) => el.classList.toggle('active', i === idx));
-    for (let i = 0; i <= allTopics.length; i++) {
+    for (let i = 0; i <= DISPUTED_IDX; i++) {
         document.getElementById(`mnav-${i}`)?.classList.toggle('active', i === idx);
     }
 
+    if (idx === DISPUTED_IDX) {
+        document.getElementById('topbar-title').textContent = '⚠️ Disputed Questions';
+        document.getElementById('topbar-sub').textContent = '5 questions with xSite discrepancies';
+        document.getElementById('progress-bar').style.width = '0%';
+        document.getElementById('progress-label').textContent = '—';
+        renderDisputed();
+        return;
+    }
+
+    currentQuestions = getQuestionsForTopic(idx);
     document.getElementById('topbar-title').textContent = getTopicLabel(idx);
     renderQuiz();
 }
@@ -1702,6 +1814,74 @@ function updateProgress() {
     document.getElementById('progress-bar').style.width = pct + '%';
     document.getElementById('progress-label').textContent = pct + '%';
     document.getElementById('topbar-sub').textContent = `${answered} / ${total} answered`;
+}
+
+// ── DISPUTED QUESTIONS DATA ───────────────────────────────────────────────
+const disputedQuestions = [
+    {
+        topic: "Intro to IoT",
+        question: "Which of the following technology uses 2.4GHz frequency?",
+        answer: "<strong>BLE, Wi-Fi, Wireless-HART, and ZigBee</strong> — all operate on the 2.4GHz ISM band per the lecture slides and independent research. xSite does not accept this combination, but based on our slides all four are correct."
+    },
+    {
+        topic: "CoAP & MQTT",
+        question: "What is the default port number for MQTT?",
+        answer: "The correct answer is <strong>1883</strong>. xSite has a typo listing it as <strong>1833</strong> — this is a data entry error on the platform. Every official MQTT source and the MQTT specification confirms port 1883."
+    },
+    {
+        topic: "Bluetooth",
+        question: "If the hopping time, assuming FHSS, is equal to 500µs, how many times would the signal hop in one second? (you can select more than one option)",
+        answer: "Mathematically: 1s ÷ 500µs = <strong>2000 hops/sec</strong>. The slides state the standard Bluetooth FHSS rate as <strong>1600 hops/sec</strong>, but that option does not exist in xSite. So the only selectable answer is <strong>2000</strong> — yet xSite still marks it wrong. No correct answer is available. Just be aware of this if it appears in the exam."
+    },
+    {
+        topic: "Z-Wave & ZigBee",
+        question: "Which frequency does Z-Wave operate on?",
+        answer: "Z-Wave operates on <strong>868 MHz in Europe</strong> and <strong>915 MHz in the US</strong> — both are valid. xSite likely expects only one answer. The slides lean towards <strong>868 MHz</strong> as the primary European frequency. If only one option is available, select 868 MHz."
+    },
+    {
+        topic: "Cellular IoT",
+        question: "A network manager chose to use QPSK (Quadrature Phase Shift Keying) as the modulation scheme for the NB-IoT network. Given this scenario, select how many bits can an NB-IoT transmit at any given point of time. (Select only the possible option)",
+        answer: "QPSK encodes <strong>2 bits per symbol</strong> — this is fundamental modulation theory. xSite marks this as <em>'None of the above'</em>, which contradicts the definition of QPSK. The technically and mathematically correct answer is <strong>2 bits</strong>."
+    }
+];
+
+// ── RENDER DISPUTED ───────────────────────────────────────────────────────
+function renderDisputed() {
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = '';
+
+    const panel = document.createElement('div');
+    panel.className = 'disputed-panel';
+
+    panel.innerHTML = `
+        <div class="disputed-intro">
+            <div class="disputed-intro-icon">⚠️</div>
+            <div class="disputed-intro-body">
+                <strong>xSite Discrepancies — Handle With Care</strong>
+                <p>These questions have answers that conflict with our lecture slides and independent research. The answers shown here are what we believe to be correct based on course material, but xSite marks them differently. Study these carefully before the exam.</p>
+            </div>
+        </div>
+    `;
+
+    disputedQuestions.forEach((dq, i) => {
+        const card = document.createElement('div');
+        card.className = 'dq-card';
+        card.style.animationDelay = `${i * 0.06}s`;
+        card.innerHTML = `
+            <div class="dq-card-header">
+                <span class="q-badge">D${i + 1}</span>
+                <span class="dq-topic-badge">${dq.topic}</span>
+            </div>
+            <div class="dq-card-q">${dq.question}</div>
+            <div class="dq-answer-block">
+                <div class="dq-answer-label">💡 Our Answer &amp; Explanation</div>
+                <div class="dq-answer-text">${dq.answer}</div>
+            </div>
+        `;
+        panel.appendChild(card);
+    });
+
+    container.appendChild(panel);
 }
 
 // ── RENDER ────────────────────────────────────────────────────────────────
@@ -1896,6 +2076,7 @@ function checkSingleQuestion(qi) {
 
 // ── CHECK ALL ─────────────────────────────────────────────────────────────
 function checkAnswers() {
+    if (activeTopic === DISPUTED_IDX) return;
     let correct = 0;
     const total = currentQuestions.length;
 
@@ -1942,6 +2123,7 @@ function checkAnswers() {
 
 // ── RESET ─────────────────────────────────────────────────────────────────
 function resetQuiz() {
+    if (activeTopic === DISPUTED_IDX) return;
     currentQuestions.forEach((q, index) => {
         if (q.type === 'dropdown' || q.type === 'match') {
             q.items.forEach((_, ii) => {
@@ -1976,6 +2158,7 @@ function hidScore() { document.getElementById('score').classList.remove('show');
 
 // ── TOGGLE ANSWERS ────────────────────────────────────────────────────────
 function toggleAnswers() {
+    if (activeTopic === DISPUTED_IDX) return;
     showingAnswers = !showingAnswers;
     currentQuestions.forEach((_, i) => {
         document.getElementById(`answer-${i}`)?.classList.toggle('show', showingAnswers);
@@ -1984,6 +2167,7 @@ function toggleAnswers() {
 
 // ── SHUFFLE ───────────────────────────────────────────────────────────────
 function shuffleQuestions() {
+    if (activeTopic === DISPUTED_IDX) return;
     currentQuestions = getQuestionsForTopic(activeTopic);
     currentQuestions.forEach(shuffleOptionsWithAnswers);
     currentQuestions.forEach(shuffleDropdownAndMatch);
