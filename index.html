@@ -554,16 +554,21 @@
                 <span class="nav-count" id="count-9">19</span>
             </button>
             <button class="nav-item" onclick="switchTopic(10)" id="nav-10">
+                <span class="nav-icon">🔒</span>
+                802.15.4 &amp; Thread
+                <span class="nav-count" id="count-10">0</span>
+            </button>
+            <button class="nav-item" onclick="switchTopic(11)" id="nav-11">
                 <span class="nav-icon">🧩</span>
                 All Questions
-                <span class="nav-count" id="count-10">0</span>
+                <span class="nav-count" id="count-11">0</span>
             </button>
 
             <div class="nav-label" style="margin-top:16px;">Other</div>
-            <button class="nav-item" onclick="switchTopic(11)" id="nav-11" style="color:#e03355;">
+            <button class="nav-item" onclick="switchTopic(12)" id="nav-12" style="color:#e03355;">
                 <span class="nav-icon">⚠️</span>
                 Disputed Qs
-                <span class="nav-count" id="count-11" style="background:rgba(224,51,85,0.10);color:#e03355;">5</span>
+                <span class="nav-count" id="count-12" style="background:rgba(224,51,85,0.10);color:#e03355;">5</span>
             </button>
         </div>
 
@@ -594,8 +599,9 @@
             <button class="mobile-nav-btn" onclick="switchTopic(7)" id="mnav-7">☁️ AIoT &amp; Cloud</button>
             <button class="mobile-nav-btn" onclick="switchTopic(8)" id="mnav-8">📱 Cellular IoT</button>
             <button class="mobile-nav-btn" onclick="switchTopic(9)" id="mnav-9">📶 WiFi &amp; HaLow</button>
-            <button class="mobile-nav-btn" onclick="switchTopic(10)" id="mnav-10">🧩 All Questions</button>
-            <button class="mobile-nav-btn" onclick="switchTopic(11)" id="mnav-11" style="color:#e03355;border-color:rgba(224,51,85,0.3);">⚠️ Disputed</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(10)" id="mnav-10">🔒 802.15.4 &amp; Thread</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(11)" id="mnav-11">🧩 All Questions</button>
+            <button class="mobile-nav-btn" onclick="switchTopic(12)" id="mnav-12" style="color:#e03355;border-color:rgba(224,51,85,0.3);">⚠️ Disputed</button>
             <button class="mobile-nav-btn" onclick="checkAnswers()">⚡ Check</button>
             <button class="mobile-nav-btn" onclick="shuffleQuestions()">🔀 Shuffle</button>
             <button class="mobile-nav-btn" onclick="toggleAnswers()">💡 Answers</button>
@@ -1866,6 +1872,215 @@ const wifiHalowQuestions = [
     }
 ];
 
+// ── TOPIC 10: 802.15.4 & Thread ───────────────────────────────────────────
+const ieee802154ThreadQuestions = [
+    {
+        question: "Which of the following is NOT true about Border Routers in a Thread Network?",
+        type: 'single',
+        options: [
+            "A REED can be configured as a Border Router in the Thread Network.",
+            "Border Router provide services to devices within the Thread Network only.",
+            "There cannot be more than 3 border routers in a Thread Network.",
+            "Border Router can provide connectivity from Thread Network to 802.11 networks."
+        ],
+        correct: 2,
+        explanation: "There is no limit of 3 border routers in a Thread Network — multiple border routers can exist to provide redundancy and improved connectivity. Border Routers provide services both within and outside the Thread Network."
+    },
+    {
+        question: "Assume Bob is using DSSS to transmit his data to Alice. Bob decided to use the chipping sequence 10110100110 to transmit his bits. Bob transmitted 330 bits to Alice. Using this information, calculate how many actual bits represent Bob’s data?",
+        type: 'input',
+        correctAnswer: "30",
+        explanation: "The chipping sequence 10110100110 has 11 chips. Actual data bits = Total transmitted bits ÷ Chips per bit = 330 ÷ 11 = 30 bits."
+    },
+    {
+        question: "6LowPAN technology sits on top of ...",
+        type: 'single',
+        options: ["IEEE 802.15.11", "IEEE 802.15.4", "Anything within IEEE 802", "IEEE 802.15.16"],
+        correct: 1,
+        explanation: "6LoWPAN (IPv6 over Low-Power Wireless Personal Area Networks) sits directly on top of IEEE 802.15.4, providing adaptation between IPv6 and the IEEE 802.15.4 MAC/PHY layers."
+    },
+    {
+        question: "What does IEEE 802.15.4 primarily focus on?",
+        type: 'single',
+        options: ["High-bandwidth local area networking", "Long-range wireless communication", "Low-rate wireless personal area networks", "High-speed internet connectivity"],
+        correct: 2,
+        explanation: "IEEE 802.15.4 defines the PHY and MAC layers for Low-Rate Wireless Personal Area Networks (LR-WPANs), targeting low data rate, low power consumption, and low cost for IoT and sensor networks."
+    },
+    {
+        question: "Assume Bob is using DSSS to transmit his data to Alice. Bob decided to use the chipping sequence 101101 to transmit his bits. If the length of the packet is 100 bits, how many bits will Bob actually transmit?",
+        type: 'input',
+        correctAnswer: "600",
+        explanation: "The chipping sequence 101101 has 6 chips. Total transmitted bits = Packet length × Chips per bit = 100 × 6 = 600 bits."
+    },
+    {
+        question: "Which of the following are not true about 6LowPAN?",
+        type: 'single',
+        options: [
+            "6LoWPAN has the capability of optional mesh routing in the data link layer",
+            "6LoWPAN is based on IPv4 and IPv6 protocols for transmitting packets",
+            "6LoWPAN is a networking layer protocol for Internet of Things",
+            "None of the statements are false."
+        ],
+        correct: 1,
+        explanation: "6LoWPAN is based on IPv6 only (not IPv4). The '6' in 6LoWPAN literally refers to IPv6. It provides header compression and fragmentation to allow IPv6 packets to fit within IEEE 802.15.4 frames."
+    },
+    {
+        question: "Which of the following frames are required to be transmitted using CSMA/CA?",
+        type: 'single',
+        options: ["Acknowledgements", "Data Frames", "Beacons", "All the mentioned frames"],
+        correct: 1,
+        explanation: "In IEEE 802.15.4, Data Frames must be transmitted using CSMA/CA. Acknowledgement frames and Beacon frames are transmitted without CSMA/CA — ACKs are sent immediately after reception, and Beacons are sent by the coordinator on a schedule."
+    },
+    {
+        question: "Consider an IEEE 802.15.4 network using Beacon-enabled CSMA/CA. Choose which of the following statements are false:",
+        type: 'multiple',
+        options: [
+            "Contention Access Period is reserved for real-time services.",
+            "Contention Free Period is reserved for real-time services.",
+            "A part of the beacon interval is busy as coordinator requires it to send out MAC command packets.",
+            "Devices can sleep during the inactive interval of the beacon interval.",
+            "Contention Free Period uses slotted CSMA.",
+            "Contention Access Period uses slotted CSMA."
+        ],
+        correct: [0, 2, 4],
+        explanation: "FALSE statements: (1) The Contention Free Period (CFP), not CAP, is reserved for real-time/guaranteed services via GTSs. (2) The coordinator does not use part of the beacon interval for MAC command packets — this is not standard behavior. (3) CFP uses TDMA (Guaranteed Time Slots), NOT slotted CSMA. TRUE: CFP is for real-time, devices can sleep in inactive period, CAP uses slotted CSMA."
+    },
+    {
+        question: "IEEE 802.15.4 is a basis for which popular IoT communication protocol? (Select all that apply)",
+        type: 'multiple',
+        options: ["Bluetooth", "LTE", "ZigBee", "WiFi", "Thread"],
+        correct: [2, 4],
+        explanation: "Both ZigBee and Thread are built on top of IEEE 802.15.4 for their PHY and MAC layers. ZigBee uses 802.15.4 with its own network and application layers; Thread similarly builds its IP-based mesh networking on top of 802.15.4."
+    },
+    {
+        question: "IEEE 802.15.4 defines the operation of which network layers? (Select all that apply)",
+        type: 'multiple',
+        options: ["Physical (PHY)", "Network Layer", "Data Link Layer", "Session Layer", "Application Layer", "Transport Layer"],
+        correct: [0, 2],
+        explanation: "IEEE 802.15.4 defines the Physical (PHY) layer and the Data Link Layer (specifically the MAC sub-layer). Higher layers such as Network, Transport, Session, and Application are left to protocols like ZigBee, Thread, or 6LoWPAN."
+    },
+    {
+        question: "Which of the following Full Thread Devices have routing capabilities? (You can select more than one)",
+        type: 'multiple',
+        options: ["Full End Device", "PAN coordinator", "Router", "Intermediate Routing Device", "Router Eligible End Device", "Leader"],
+        correct: [2, 4, 5],
+        explanation: "In Thread: Routers actively perform routing. Router Eligible End Devices (REEDs) can be promoted to Routers and thus have routing capability. The Leader is a special Router that manages the network. Full End Devices and PAN coordinators do not perform routing in Thread."
+    },
+    {
+        question: "If the EUI64 address of a device is 62::1, what would be its link local IPv6 address? Assume 6LowPAN protocol.",
+        type: 'single',
+        options: ["FE80:0:0:0:66::1", "FE80:0:0:0:60::1", "None of answer mentioned", "FE80:0:0:0:22::1", "FE80:0:0:0:62::1"],
+        correct: 3,
+        explanation: "In 6LoWPAN, the link-local IPv6 address is formed as FE80::/64 + Modified EUI-64. To convert EUI-64 to Modified EUI-64, flip bit 7 (the Universal/Local bit) of the first byte. 62 in hex = 0110 0010; flipping bit 7 gives 0010 0010 = 22 hex. So the link-local address is FE80:0:0:0:22::1."
+    },
+    {
+        question: "Which of the following is not a characteristic of Thread?",
+        type: 'single',
+        options: [
+            "Devices can easily join the network.",
+            "The range of the network is more than enough to cover a home.",
+            "All the options are characteristics of Thread.",
+            "Thread can support large networks.",
+            "There is no single point of failure."
+        ],
+        correct: 0,
+        explanation: "Thread is specifically designed with secure commissioning — devices cannot easily/freely join the network. New devices must be explicitly commissioned with proper credentials. The other options (home range coverage, large network support, no single point of failure) are genuine Thread characteristics."
+    },
+    {
+        question: "The full form of 6LoWPAN is ...",
+        type: 'single',
+        options: [
+            "IPv6 over Low-Power Wide Area Networks",
+            "IPv6 over Low-Power Wireless Personal Area Networks",
+            "6 Low Power Wide Personal Area Network",
+            "6 Low Power Wireless Personal Area Network"
+        ],
+        correct: 1,
+        explanation: "6LoWPAN stands for IPv6 over Low-Power Wireless Personal Area Networks. It provides the adaptation layer that allows IPv6 to run over IEEE 802.15.4 networks."
+    },
+    {
+        question: "6LowPAN is the same as IEEE 802.15.4",
+        type: 'single',
+        options: ["True", "False"],
+        correct: 1,
+        explanation: "False. IEEE 802.15.4 defines the PHY and MAC layers for low-rate wireless networks. 6LoWPAN is a separate adaptation layer protocol that sits on top of 802.15.4, enabling IPv6 communication over those networks."
+    },
+    {
+        question: "If the 16-bit address assigned to a device in a 6LowPAN network is 4EA1, what is the IPv6 link local address?",
+        type: 'single',
+        options: ["FE80::1111:4EA1", "PAN ID is unknown.", "FE80::4EA1", "FE80:4EA1::0"],
+        correct: 2,
+        explanation: "For a 16-bit short address in 6LoWPAN, the link-local IPv6 address is formed as FE80::00FF:FE00:XXXX where XXXX is the 16-bit address. In compressed notation, FE80::4EA1 represents this address (the zero fields are suppressed). Note: full form would be FE80::FF:FE00:4EA1."
+    },
+    {
+        question: "6LowPAN uses traditional IPv6 as its networking layer.",
+        type: 'single',
+        options: ["True", "False"],
+        correct: 1,
+        explanation: "False. 6LoWPAN uses a compressed and adapted version of IPv6, not traditional IPv6. It introduces header compression, fragmentation, and reassembly to fit IPv6 packets within the small MTU of IEEE 802.15.4 frames (127 bytes max)."
+    },
+    {
+        question: "Which type of modulation is used in IEEE 802.15.4?",
+        type: 'single',
+        options: ["Direct Sequence Spread Spectrum (DSSS)", "Orthogonal Frequency-Division Multiplexing (OFDM)", "Frequency Shift Keying (FSK)", "Phase-Shift Keying (PSK)"],
+        correct: 0,
+        explanation: "IEEE 802.15.4 uses Direct Sequence Spread Spectrum (DSSS) for modulation in the 2.4 GHz band. DSSS spreads the signal over a wider bandwidth using a chipping sequence, providing resistance to interference."
+    },
+    {
+        question: "Which of the following is true about Thread Network?",
+        type: 'single',
+        options: [
+            "IPV6 ULA address is used for mesh establishment and link maintenance.",
+            "Every Thread device is assigned only one Mesh local address.",
+            "Thread enables full mesh connectivity between all the devices in the network.",
+            "A thread network can employ more 10 routers in the network.",
+            "None of the Above"
+        ],
+        correct: 4,
+        explanation: "None of the above are correct: (1) Link-local addresses (not ULA) are used for mesh establishment and link maintenance. (2) Thread devices can be assigned multiple addresses. (3) Thread uses a partial mesh — not all devices are full mesh participants (End Devices are leaves). (4) Thread supports up to 32 routers (not limited to 10)."
+    },
+    {
+        question: "Which of the following are used by IEEE 802.15.4? (Select all that apply)",
+        type: 'multiple',
+        options: ["Frequency Hopping Spread Spectrum", "Direct Sequence Spread Spectrum", "CSMA with Collision Avoidance", "CSMA with Collision Detection"],
+        correct: [1, 2],
+        explanation: "IEEE 802.15.4 uses Direct Sequence Spread Spectrum (DSSS) for its PHY layer modulation and CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance) for its MAC layer channel access. It does NOT use FHSS or CSMA/CD."
+    },
+    {
+        question: "The size of MTU for an 802.15.4 network is equal to 127 bytes. Of which, 802.15.4 header occupies 25 bytes, security option occupies 21 bytes, IPv6 and UDP compressed headers occupy 10 bytes. Given this situation, choose which of the following application layer payloads (only the size of the payload is shown) can be transmitted over the network. Assume Thread protocol is used for the higher layers.",
+        type: 'single',
+        options: ["71", "80", "120", "127", "All of the above"],
+        correct: 4,
+        explanation: "Available payload = 127 - 25 - 21 - 10 = 71 bytes. Any payload of 71 bytes or less can be transmitted without fragmentation. All options (71, 80... wait — only 71 fits in a single frame, but Thread supports 6LoWPAN fragmentation, so larger payloads like 80 can also be transmitted via fragmentation. With Thread/6LoWPAN fragmentation, all the listed sizes can be transmitted."
+    },
+    {
+        question: "Which of the following phases are required for a device to re-attach to a Thread Network? (You can select more than one)",
+        type: 'multiple',
+        options: ["Configuring", "Attaching", "Commissioning", "Discovery"],
+        correct: [1],
+        explanation: "When a device re-attaches to a Thread Network (i.e., it has previously joined), it only needs the Attaching phase — it already has the network credentials from commissioning. Discovery and Commissioning are only needed for the first-time join process."
+    },
+    {
+        question: "What kind of network topology is supported by IEEE 802.15.4? (Select all that apply)",
+        type: 'multiple',
+        options: ["Bus", "Mesh", "Star", "Point-to-Point"],
+        correct: [1, 2, 3],
+        explanation: "IEEE 802.15.4 supports Star, Mesh (peer-to-peer), and Point-to-Point topologies. Bus topology is not supported by IEEE 802.15.4."
+    },
+    {
+        question: "Assume that a user wants to transmit bit 0 using Direct Sequence Spread Spectrum. The user using 'XOR' to generate the same. What is the transmitted signal (in binary) if the chipping sequence is 011011000101?",
+        type: 'input',
+        correctAnswer: "011011000101",
+        explanation: "In DSSS with XOR: bit 0 XOR chipping sequence = 0 XOR each chip = the chipping sequence itself (since 0 XOR x = x). So transmitting bit 0 with chipping sequence 011011000101 gives 011011000101."
+    },
+    {
+        question: "Assume that a user wants to transmit bit 1 using Direct Sequence Spread Spectrum. The user using 'XOR' to generate the same. What is the transmitted signal (in binary) if the chipping sequence is 101011010011?",
+        type: 'input',
+        correctAnswer: "010100101100",
+        explanation: "In DSSS with XOR: bit 1 XOR chipping sequence = 1 XOR each chip = inverted chipping sequence (since 1 XOR x = NOT x). So 101011010011 inverted = 010100101100."
+    }
+];
+
 const allTopics = [
     { label: "Introduction to IoT",  short: "Intro to IoT",      questions: iotQuestions,          icon: "📡" },
     { label: "HTTP & REST",          short: "HTTP & REST",       questions: restQuestions,         icon: "🔗" },
@@ -1876,7 +2091,8 @@ const allTopics = [
     { label: "Z-Wave & ZigBee",      short: "Z-Wave & ZigBee",   questions: zigbeeQuestions,       icon: "📶" },
     { label: "AIoT & Cloud",         short: "AIoT & Cloud",      questions: aiotAndCloudQuestions, icon: "☁️" },
     { label: "Cellular IoT",         short: "Cellular IoT",      questions: cellularIoTQuestions,  icon: "📱" },
-    { label: "WiFi & HaLow",         short: "WiFi & HaLow",      questions: wifiHalowQuestions,    icon: "📶" }
+    { label: "WiFi & HaLow",         short: "WiFi & HaLow",      questions: wifiHalowQuestions,    icon: "📶" },
+    { label: "802.15.4 & Thread",    short: "802.15.4 & Thread",  questions: ieee802154ThreadQuestions, icon: "🔒" }
 ];
 
 const allTab = {
@@ -1986,7 +2202,7 @@ if (allCountEl) {
 }
 
 // ── TOPIC SWITCH ──────────────────────────────────────────────────────────
-const DISPUTED_IDX = 11;
+const DISPUTED_IDX = 12;
 
 function switchTopic(idx) {
     activeTopic = idx;
@@ -2019,6 +2235,7 @@ function updateProgress() {
         const q = currentQuestions[i];
         if (q.type === 'dropdown' || q.type === 'match') return Array.isArray(a) && a.some(v => v !== null);
         if (q.type === 'multiple') return Array.isArray(a) && a.length > 0;
+        if (q.type === 'input') return typeof a === 'string' && a.trim() !== '';
         return a !== null && a !== undefined;
     }).length;
 
@@ -2101,17 +2318,18 @@ function renderQuiz() {
     const container = document.getElementById('quiz-container');
     container.innerHTML = '';
 
-    const typeLabels = { single: 'Single Choice', multiple: 'Multi Select', dropdown: 'Ordering', match: 'Matching' };
+    const typeLabels = { single: 'Single Choice', multiple: 'Multi Select', dropdown: 'Ordering', match: 'Matching', input: 'Input' };
 
     currentQuestions.forEach((q, index) => {
         const card = document.createElement('div');
         card.className = 'question-card';
         card.style.animationDelay = `${index * 0.04}s`;
 
-        const showCheckBtn = q.type === 'multiple' || q.type === 'match' || q.type === 'dropdown';
+        const showCheckBtn = q.type === 'multiple' || q.type === 'match' || q.type === 'dropdown' || q.type === 'input';
         let checkBtnLabel = 'Check Selection';
         if (q.type === 'match') checkBtnLabel = 'Check Matching';
         if (q.type === 'dropdown') checkBtnLabel = 'Check Order';
+        if (q.type === 'input') checkBtnLabel = 'Check Answer';
 
         card.innerHTML = `
             <div class="card-header">
@@ -2134,6 +2352,7 @@ function renderQuiz() {
     userAnswers = currentQuestions.map(q => {
         if (q.type === 'dropdown' || q.type === 'match') return q.items.map(() => null);
         if (q.type === 'multiple') return [];
+        if (q.type === 'input') return '';
         return null;
     });
 
@@ -2185,6 +2404,29 @@ function renderOptions(q, qi) {
             d.onclick = () => { const cb = document.getElementById(`q${qi}-${oi}`); cb.checked = !cb.checked; selectMultiple(qi, oi); };
             div.appendChild(d);
         });
+    } else if (q.type === 'input') {
+        const d = document.createElement('div');
+        d.innerHTML = `
+            <input
+                type="text"
+                id="input-${qi}"
+                placeholder="Enter your answer"
+                style="
+                    width: 280px;
+                    max-width: 100%;
+                    padding: 12px 14px;
+                    border-radius: 10px;
+                    border: 1px solid var(--border2);
+                    background: var(--surface);
+                    color: var(--text);
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 14px;
+                    outline: none;
+                "
+                oninput="selectInput(${qi}, this.value)"
+            >
+        `;
+        div.appendChild(d);
     }
 }
 
@@ -2242,6 +2484,14 @@ function selectDropdown(qi, ii, val) {
     updateProgress();
 }
 
+function selectInput(qi, value) {
+    userAnswers[qi] = value.trim();
+    const inputBox = document.getElementById(`input-${qi}`);
+    if (inputBox) inputBox.style.borderColor = 'var(--border2)';
+    markStatus(qi, userAnswers[qi] ? 'answered' : '');
+    updateProgress();
+}
+
 // ── STATUS DOT ────────────────────────────────────────────────────────────
 function markStatus(qi, cls) {
     const el = document.getElementById(`status-${qi}`);
@@ -2254,6 +2504,21 @@ function markStatus(qi, cls) {
 function checkSingleQuestion(qi) {
     const q = currentQuestions[qi];
     const ua = userAnswers[qi];
+
+    if (q.type === 'input') {
+        const user = (ua || '').replace(/\s/g, '');
+        const correct = (q.correctAnswer || '').replace(/\s/g, '');
+        const isCorrect = user === correct;
+
+        const inputBox = document.getElementById(`input-${qi}`);
+        if (inputBox) {
+            inputBox.style.borderColor = isCorrect ? 'var(--green)' : 'var(--red)';
+        }
+
+        markStatus(qi, isCorrect ? 'correct-q' : 'wrong-q');
+        document.getElementById(`answer-${qi}`).classList.add('show');
+        return;
+    }
 
     if (q.type === 'match' || q.type === 'dropdown') {
         // Check each dropdown row
@@ -2317,6 +2582,15 @@ function checkAnswers() {
             });
         } else if (q.type === 'single') {
             ok = userAnswers[index] === q.correct;
+        } else if (q.type === 'input') {
+            const user = (userAnswers[index] || '').replace(/\s/g, '');
+            const correctText = (q.correctAnswer || '').replace(/\s/g, '');
+            ok = user === correctText;
+
+            const inputBox = document.getElementById(`input-${index}`);
+            if (inputBox) {
+                inputBox.style.borderColor = ok ? 'var(--green)' : 'var(--red)';
+            }
         }
 
         if (ok) correct++;
@@ -2343,6 +2617,12 @@ function resetQuiz() {
                 if (sel) sel.value = '';
                 document.getElementById(`dropdown-${index}-${ii}`)?.classList.remove('correct','incorrect');
             });
+        } else if (q.type === 'input') {
+            const inputBox = document.getElementById(`input-${index}`);
+            if (inputBox) {
+                inputBox.value = '';
+                inputBox.style.borderColor = 'var(--border2)';
+            }
         } else {
             document.querySelectorAll(`input[name="q${index}"]`).forEach((inp, oi) => {
                 inp.checked = false;
@@ -2358,6 +2638,7 @@ function resetQuiz() {
     userAnswers = currentQuestions.map(q => {
         if (q.type === 'dropdown' || q.type === 'match') return q.items.map(() => null);
         if (q.type === 'multiple') return [];
+        if (q.type === 'input') return '';
         return null;
     });
 
