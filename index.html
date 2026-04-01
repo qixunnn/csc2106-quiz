@@ -1751,12 +1751,11 @@ const wifiHalowQuestions = [
         explanation: "False. While many 802.11 standards are backward compatible, not all 802.11 devices are compatible with each other. For example, 802.11ah (HaLow) operates at sub-1 GHz and is not compatible with standard 2.4/5 GHz 802.11 devices."
     },
     {
-        // ── PATCH 4: Non-overlapping channels — correct is now index 3 (11) ──
-        question: "How many non-overlapping WiFi channels are there for the 2.4GHz band?",
+        question: "How many overlapping WiFi channels are there for the 2.4GHz band?",
         type: 'single',
         options: ["12", "14", "3", "11"],
         correct: 3,
-        explanation: "xSite marks 11 as correct (total available channels in most regions). Technically only 3 channels (1, 6, 11) are truly non-overlapping — see Disputed Qs tab for details."
+        explanation: "Only 3 channels (1, 6, 11) are non-overlapping"
     },
     {
         question: "Which channel access technique is used in HaLow?",
@@ -2277,11 +2276,6 @@ const disputedQuestions = [
         topic: "Cellular IoT",
         question: "A network manager chose to use QPSK (Quadrature Phase Shift Keying) as the modulation scheme for the NB-IoT network. Given this scenario, select how many bits can an NB-IoT transmit at any given point of time. (Select only the possible option)",
         answer: "QPSK encodes <strong>2 bits per symbol</strong> — this is fundamental modulation theory. xSite marks this as <em>'None of the above'</em>, which contradicts the definition of QPSK. The technically and mathematically correct answer is <strong>2 bits</strong>."
-    },
-    {
-        topic: "WiFi & HaLow",
-        question: "How many non-overlapping WiFi channels are there for the 2.4GHz band?",
-        answer: "xSite marks <strong>11</strong> as correct (the total number of available channels in most regions). However, only <strong>3 channels</strong> (1, 6, and 11) are truly non-overlapping. The question asks for non-overlapping channels, making 3 the technically correct answer — but xSite expects 11."
     },
     {
         topic: "WiFi & HaLow",
