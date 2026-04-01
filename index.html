@@ -516,17 +516,17 @@
             <button class="nav-item" onclick="switchTopic(2)" id="nav-2">
                 <span class="nav-icon">🌐</span>
                 CoAP &amp; MQTT
-                <span class="nav-count" id="count-2">24</span>
+                <span class="nav-count" id="count-2">26</span>
             </button>
             <button class="nav-item" onclick="switchTopic(3)" id="nav-3">
                 <span class="nav-icon">🕸️</span>
                 Wireless Mesh
-                <span class="nav-count" id="count-3">17</span>
+                <span class="nav-count" id="count-3">14</span>
             </button>
             <button class="nav-item" onclick="switchTopic(4)" id="nav-4">
                 <span class="nav-icon">📻</span>
                 LoRa &amp; LoRaWAN
-                <span class="nav-count" id="count-4">16</span>
+                <span class="nav-count" id="count-4">18</span>
             </button>
             <button class="nav-item" onclick="switchTopic(5)" id="nav-5">
                 <span class="nav-icon">🔵</span>
@@ -541,7 +541,7 @@
             <button class="nav-item" onclick="switchTopic(7)" id="nav-7">
                 <span class="nav-icon">☁️</span>
                 AIoT &amp; Cloud
-                <span class="nav-count" id="count-7">14</span>
+                <span class="nav-count" id="count-7">19</span>
             </button>
             <button class="nav-item" onclick="switchTopic(8)" id="nav-8">
                 <span class="nav-icon">📱</span>
@@ -568,7 +568,7 @@
             <button class="nav-item" onclick="switchTopic(12)" id="nav-12" style="color:#e03355;">
                 <span class="nav-icon">⚠️</span>
                 Disputed Qs
-                <span class="nav-count" id="count-12" style="background:rgba(224,51,85,0.10);color:#e03355;">5</span>
+                <span class="nav-count" id="count-12" style="background:rgba(224,51,85,0.10);color:#e03355;">7</span>
             </button>
         </div>
 
@@ -677,11 +677,12 @@ const iotQuestions = [
         explanation: "Power Supply is infrastructure support, not a functional component. The core IoT device components are: Sensor, Actuator, Controller, and Communication modules."
     },
     {
+        // ── PATCH 1: Added LoRa (index 4) to correct answers ──
         question: "Which of the following technology uses 2.4GHz frequency?",
         type: 'multiple',
         options: ["Z-Wave","NB-IoT","SigFox","Bluetooth/BLE","LoRa","WiFi","Weightless","2G/3G","Wireless HART","ZigBee"],
-        correct: [3, 5, 8, 9],
-        explanation: "Technologies using 2.4GHz: Bluetooth/BLE, WiFi, Wireless HART, and ZigBee all operate in the 2.4GHz ISM band."
+        correct: [3, 4, 5, 8, 9],
+        explanation: "Technologies using 2.4GHz: Bluetooth/BLE, LoRa (2.4GHz variant), WiFi, Wireless HART, and ZigBee all operate in the 2.4GHz ISM band."
     },
     {
         question: "The various factors (range, power, data rate, scalability, security and cost) have the same level of importance in any IoT solution.",
@@ -742,7 +743,7 @@ const CoAPMQTTQuestions = [
     { question: "CoAP provides which of the following requirements?", type: 'single', options: ["Multicast support and simplicity","Simplicity and low overhead","Multicast support, lower overhead and simplicity","Lower overhead and multicast support"], correct: 2, explanation: "CoAP is designed for multicast support, low overhead, and simplicity." },
     { question: "What is the maximum number of clients that can subscribe to a single topic in MQTT?", type: 'single', options: ["1","Unlimited","100","10"], correct: 1, explanation: "MQTT allows unlimited clients to subscribe to a topic." },
     { question: "The Last Will Message is used to:", type: 'single', options: ["Guarantee that the message was delivered","Gain inheritance","Notify a publisher of a network failure","Notify clients of a failure in the publisher"], correct: 3, explanation: "It notifies subscribers if a publisher disconnects unexpectedly." },
-    { question: "What is the default port number for MQTT?", type: 'single', options: ["80","8080","1883","8883"], correct: 2, explanation: "Default MQTT port is 1883 BUT quiz shows 1833 BEWARD!!!!!!!." },
+    { question: "What is the default port number for MQTT?", type: 'single', options: ["80","8080","1883","8883"], correct: 2, explanation: "Default MQTT port is 1883 BUT quiz shows 1833 BEWARE!!!!!!!" },
     { question: "Which protocol is CoAP closely modeled after?", type: 'single', options: ["HTTP","FTP","AMQP","MQTT"], correct: 0, explanation: "CoAP is modeled after HTTP." },
     { question: "What does MQTT stand for?", type: 'single', options: ["Message Querying Telecommunication Transmission","Message Queuing Telemetry Transport","Message Queuing Transaction Transport","Message Quorum Transport Technology"], correct: 1, explanation: "MQTT stands for Message Queuing Telemetry Transport." },
     { question: "CoAP messages can be of which types?", type: 'single', options: ["Persistent and Transient","Request and Response","Confirmable and Non-Confirmable","Synchronous and Asynchronous"], correct: 2, explanation: "CoAP uses Confirmable and Non-Confirmable message types." },
@@ -774,8 +775,8 @@ const CoAPMQTTQuestions = [
         ], 
         correct: [0, 1], 
         explanation: "CoAP uses GET for retrieval and PUT for creating/updating resources, similar to HTTP."
-        },
-        {
+    },
+    {
         question: "CoAP Protocol is comprised of which sub-layers?", 
         type: 'multiple', 
         options: [
@@ -786,10 +787,10 @@ const CoAPMQTTQuestions = [
         ], 
         correct: [0, 3], 
         explanation: "CoAP consists of Message layer and Request/Response layer."
-        }
+    }
 ];
 
-// ── TOPIC 2: Z-Wave & ZigBee ───────────────────────────────────────────────
+// ── TOPIC 6: Z-Wave & ZigBee ───────────────────────────────────────────────
 const zigbeeQuestions = [
     {
         question: "Which frequency does Z-Wave operate on?",
@@ -911,7 +912,7 @@ const loraQuestions = [
     }
 ];
 
-// ── ALL TOPICS ─────────────────────────────────────────────────────────────
+// ── TOPIC 3: Wireless Mesh ─────────────────────────────────────────────────
 const meshQuestions = [
     {
         question: "Optimized Link State Routing Protocol uses triggered updates of their routing table whenever there is a topology change.",
@@ -1078,14 +1079,16 @@ const meshQuestions = [
         explanation: "Wireless mesh networks use a decentralized architecture, not centralized. Scalability, efficient data routing, and self-healing are all genuine features of mesh networks."
     }
 ];
-//aiotclound
+
+// ── TOPIC 7: AIoT & Cloud ─────────────────────────────────────────────────
 const aiotAndCloudQuestions = [
     {
+        // ── PATCH 3: AIoT stands for — correct is now index 2 (xSite answer) ──
         question: "AIoT stands for?",
         type: 'single',
         options: ["Advanced IoT", "Artificial Internet of Things", "Artificial Intelligence on IoT", "Artificial Intelligence of Things"],
-        correct: 3,
-        explanation: "AIoT stands for Artificial Intelligence of Things."
+        correct: 2,
+        explanation: "xSite marks 'Artificial Intelligence on IoT' as correct. Note: The widely accepted industry definition is 'Artificial Intelligence of Things' — see the Disputed Qs tab for details."
     },
     {
         question: "Which of the following is not a potential use case for AIoT in industrial automation?",
@@ -1296,6 +1299,7 @@ const aiotAndCloudQuestions = [
     }
 ];
 
+// ── TOPIC 5: Bluetooth ────────────────────────────────────────────────────
 const bluetoothQuestions = [
     {
         question: "What does BLE stand for?",
@@ -1474,7 +1478,7 @@ const bluetoothQuestions = [
     }
 ];
 
-// ── CELLULAR IOT QUESTIONS ────────────────────────────────────────────────
+// ── TOPIC 8: Cellular IoT ─────────────────────────────────────────────────
 const cellularIoTQuestions = [
     {
         question: "Assume that you are a network operator, and you are allocated a frequency spectrum of bandwidth equal to 1000kHz for carrying out cellular operation. You chose to implement FDMA as the multiple access scheme. How many users can you support if each user requires a bandwidth equal to 40kHz. Assume that the bandwidth of the guard band on each side of the spectrum must be equal to 50kHz.",
@@ -1567,7 +1571,7 @@ const cellularIoTQuestions = [
         type: 'single',
         options: ["All of the above", "None of the above", "Two bits", "Only one bit", "Three bits"],
         correct: 1,
-        explanation: "NB-IoT does not use standard QPSK in the way described. The answer is 'None of the above' as the premise does not match NB-IoT's actual modulation operation."
+        explanation: "xSite marks this as 'None of the above'. Technically QPSK encodes 2 bits per symbol — see Disputed Qs tab for details."
     },
     {
         question: "Assume that you are a network operator, and you chose to implement TDMA as the multiple access scheme. How much bandwidth is required to support 10 users if each user requires a bandwidth equal to 400kHz. Assume that the bandwidth of the guard band on each side of the spectrum must be equal to 50kHz.",
@@ -1596,6 +1600,7 @@ const cellularIoTQuestions = [
         explanation: "NB-IoT was introduced in 3GPP Release 13, which falls under the LTE-Advanced Pro standard (also known as 4.5G)."
     },
     {
+        // ── PATCH 2: Statement A/B mobility — correct is now index 0 ──
         question: "Consider the following two statements and select the appropriate option below:<br><br><strong>Statement A:</strong> Any mobile connected to a 4G network can move while retaining an active connection.<br><strong>Statement B:</strong> As NB-IoT devices rely on coverage provided by 4G, they can also move while maintaining an active connection.",
         type: 'single',
         options: [
@@ -1605,8 +1610,8 @@ const cellularIoTQuestions = [
             "Statements A and B are true. Statement B and Statement A are independent of each other.",
             "Both Statements are false."
         ],
-        correct: 1,
-        explanation: "As per the answer key: Statement B is true, but Statement A is false."
+        correct: 0,
+        explanation: "Statement A is true — 4G (LTE) supports handover, so mobiles retain active connections while moving. Statement B is false — NB-IoT does NOT support handover/mobility; it is designed for stationary or very-low-mobility devices and cannot maintain an active connection while moving."
     },
     {
         question: "Which of the following is not a feature of NB-IoT?",
@@ -1667,7 +1672,7 @@ const cellularIoTQuestions = [
     }
 ];
 
-// ── WIFI & HALOW QUESTIONS ────────────────────────────────────────────────
+// ── TOPIC 9: WiFi & HaLow ─────────────────────────────────────────────────
 const wifiHalowQuestions = [
     {
         question: "Which of the following are advantages of using Relays in HaLow? (Select all that apply)",
@@ -1746,11 +1751,12 @@ const wifiHalowQuestions = [
         explanation: "False. While many 802.11 standards are backward compatible, not all 802.11 devices are compatible with each other. For example, 802.11ah (HaLow) operates at sub-1 GHz and is not compatible with standard 2.4/5 GHz 802.11 devices."
     },
     {
+        // ── PATCH 4: Non-overlapping channels — correct is now index 3 (11) ──
         question: "How many non-overlapping WiFi channels are there for the 2.4GHz band?",
         type: 'single',
         options: ["12", "14", "3", "11"],
-        correct: 2,
-        explanation: "The 2.4GHz band has 14 channels total, but only 3 are non-overlapping (channels 1, 6, and 11). There are 11 channels available in most countries, but only 3 do not overlap with each other."
+        correct: 3,
+        explanation: "xSite marks 11 as correct (total available channels in most regions). Technically only 3 channels (1, 6, 11) are truly non-overlapping — see Disputed Qs tab for details."
     },
     {
         question: "Which channel access technique is used in HaLow?",
@@ -1845,6 +1851,7 @@ const wifiHalowQuestions = [
         explanation: "The Modulation and Coding Scheme (MCS) is selected based on the Signal to Noise Ratio (SNR) at the receiver. A higher SNR allows higher-order modulation (e.g., 256-QAM), while a lower SNR requires more robust, lower-order schemes."
     },
     {
+        // ── PATCH 5: WiFi true statements — correct is now [2, 3] ──
         question: "Select the true statements for WiFi. (Select all that apply)",
         type: 'multiple',
         options: [
@@ -1853,8 +1860,8 @@ const wifiHalowQuestions = [
             "Its frequency ranges from 2.4GHz to 2.5GHz",
             "The 5GHz Band has a 150MHz bandwidth"
         ],
-        correct: [2],
-        explanation: "Wi-Fi's 2.4GHz band spans from 2.4GHz to 2.5GHz (100MHz total bandwidth). The 5GHz band spans a much wider range (approximately 5.15GHz to 5.85GHz, giving ~700MHz). The 2.4GHz band does not have 150MHz bandwidth."
+        correct: [2, 3],
+        explanation: "xSite marks both options as correct. Technically the 2.4GHz range (2.4–2.5GHz) is accurate, but the 5GHz band is actually ~700MHz wide — see Disputed Qs tab for details."
     },
     {
         question: "What is the typical range of HaLow compared to traditional Wi-Fi?",
@@ -1887,7 +1894,7 @@ const ieee802154ThreadQuestions = [
         explanation: "There is no limit of 3 border routers in a Thread Network — multiple border routers can exist to provide redundancy and improved connectivity. Border Routers provide services both within and outside the Thread Network."
     },
     {
-        question: "Assume Bob is using DSSS to transmit his data to Alice. Bob decided to use the chipping sequence 10110100110 to transmit his bits. Bob transmitted 330 bits to Alice. Using this information, calculate how many actual bits represent Bob’s data?",
+        question: "Assume Bob is using DSSS to transmit his data to Alice. Bob decided to use the chipping sequence 10110100110 to transmit his bits. Bob transmitted 330 bits to Alice. Using this information, calculate how many actual bits represent Bob's data?",
         type: 'input',
         correctAnswer: "30",
         explanation: "The chipping sequence 10110100110 has 11 chips. Actual data bits = Total transmitted bits ÷ Chips per bit = 330 ÷ 11 = 30 bits."
@@ -1943,35 +1950,35 @@ const ieee802154ThreadQuestions = [
             "Contention Access Period uses slotted CSMA."
         ],
         correct: [0, 2, 4],
-        explanation: "FALSE statements: (1) The Contention Free Period (CFP), not CAP, is reserved for real-time/guaranteed services via GTSs. (2) The coordinator does not use part of the beacon interval for MAC command packets — this is not standard behavior. (3) CFP uses TDMA (Guaranteed Time Slots), NOT slotted CSMA. TRUE: CFP is for real-time, devices can sleep in inactive period, CAP uses slotted CSMA."
+        explanation: "FALSE statements: (1) The Contention Free Period (CFP), not CAP, is reserved for real-time/guaranteed services via GTSs. (2) The coordinator does not use part of the beacon interval for MAC command packets. (3) CFP uses TDMA (Guaranteed Time Slots), NOT slotted CSMA. TRUE: CFP is for real-time, devices can sleep in inactive period, CAP uses slotted CSMA."
     },
     {
         question: "IEEE 802.15.4 is a basis for which popular IoT communication protocol? (Select all that apply)",
         type: 'multiple',
         options: ["Bluetooth", "LTE", "ZigBee", "WiFi", "Thread"],
         correct: [2, 4],
-        explanation: "Both ZigBee and Thread are built on top of IEEE 802.15.4 for their PHY and MAC layers. ZigBee uses 802.15.4 with its own network and application layers; Thread similarly builds its IP-based mesh networking on top of 802.15.4."
+        explanation: "Both ZigBee and Thread are built on top of IEEE 802.15.4 for their PHY and MAC layers."
     },
     {
         question: "IEEE 802.15.4 defines the operation of which network layers? (Select all that apply)",
         type: 'multiple',
         options: ["Physical (PHY)", "Network Layer", "Data Link Layer", "Session Layer", "Application Layer", "Transport Layer"],
         correct: [0, 2],
-        explanation: "IEEE 802.15.4 defines the Physical (PHY) layer and the Data Link Layer (specifically the MAC sub-layer). Higher layers such as Network, Transport, Session, and Application are left to protocols like ZigBee, Thread, or 6LoWPAN."
+        explanation: "IEEE 802.15.4 defines the Physical (PHY) layer and the Data Link Layer (specifically the MAC sub-layer)."
     },
     {
         question: "Which of the following Full Thread Devices have routing capabilities? (You can select more than one)",
         type: 'multiple',
         options: ["Full End Device", "PAN coordinator", "Router", "Intermediate Routing Device", "Router Eligible End Device", "Leader"],
         correct: [2, 4, 5],
-        explanation: "In Thread: Routers actively perform routing. Router Eligible End Devices (REEDs) can be promoted to Routers and thus have routing capability. The Leader is a special Router that manages the network. Full End Devices and PAN coordinators do not perform routing in Thread."
+        explanation: "In Thread: Routers actively perform routing. Router Eligible End Devices (REEDs) can be promoted to Routers and thus have routing capability. The Leader is a special Router that manages the network."
     },
     {
         question: "If the EUI64 address of a device is 62::1, what would be its link local IPv6 address? Assume 6LowPAN protocol.",
         type: 'single',
         options: ["FE80:0:0:0:66::1", "FE80:0:0:0:60::1", "None of answer mentioned", "FE80:0:0:0:22::1", "FE80:0:0:0:62::1"],
         correct: 3,
-        explanation: "In 6LoWPAN, the link-local IPv6 address is formed as FE80::/64 + Modified EUI-64. To convert EUI-64 to Modified EUI-64, flip bit 7 (the Universal/Local bit) of the first byte. 62 in hex = 0110 0010; flipping bit 7 gives 0010 0010 = 22 hex. So the link-local address is FE80:0:0:0:22::1."
+        explanation: "In 6LoWPAN, flip bit 7 of the first byte. 62 hex = 0110 0010; flipping bit 7 gives 0010 0010 = 22 hex. So the link-local address is FE80:0:0:0:22::1."
     },
     {
         question: "Which of the following is not a characteristic of Thread?",
@@ -1984,7 +1991,7 @@ const ieee802154ThreadQuestions = [
             "There is no single point of failure."
         ],
         correct: 0,
-        explanation: "Thread is specifically designed with secure commissioning — devices cannot easily/freely join the network. New devices must be explicitly commissioned with proper credentials. The other options (home range coverage, large network support, no single point of failure) are genuine Thread characteristics."
+        explanation: "Thread is specifically designed with secure commissioning — devices cannot easily/freely join the network. New devices must be explicitly commissioned with proper credentials."
     },
     {
         question: "The full form of 6LoWPAN is ...",
@@ -1996,35 +2003,35 @@ const ieee802154ThreadQuestions = [
             "6 Low Power Wireless Personal Area Network"
         ],
         correct: 1,
-        explanation: "6LoWPAN stands for IPv6 over Low-Power Wireless Personal Area Networks. It provides the adaptation layer that allows IPv6 to run over IEEE 802.15.4 networks."
+        explanation: "6LoWPAN stands for IPv6 over Low-Power Wireless Personal Area Networks."
     },
     {
         question: "6LowPAN is the same as IEEE 802.15.4",
         type: 'single',
         options: ["True", "False"],
         correct: 1,
-        explanation: "False. IEEE 802.15.4 defines the PHY and MAC layers for low-rate wireless networks. 6LoWPAN is a separate adaptation layer protocol that sits on top of 802.15.4, enabling IPv6 communication over those networks."
+        explanation: "False. IEEE 802.15.4 defines the PHY and MAC layers. 6LoWPAN is a separate adaptation layer protocol that sits on top of 802.15.4, enabling IPv6 communication."
     },
     {
         question: "If the 16-bit address assigned to a device in a 6LowPAN network is 4EA1, what is the IPv6 link local address?",
         type: 'single',
         options: ["FE80::1111:4EA1", "PAN ID is unknown.", "FE80::4EA1", "FE80:4EA1::0"],
         correct: 2,
-        explanation: "For a 16-bit short address in 6LoWPAN, the link-local IPv6 address is formed as FE80::00FF:FE00:XXXX where XXXX is the 16-bit address. In compressed notation, FE80::4EA1 represents this address (the zero fields are suppressed). Note: full form would be FE80::FF:FE00:4EA1."
+        explanation: "For a 16-bit short address in 6LoWPAN, the link-local IPv6 address in compressed notation is FE80::4EA1."
     },
     {
         question: "6LowPAN uses traditional IPv6 as its networking layer.",
         type: 'single',
         options: ["True", "False"],
         correct: 1,
-        explanation: "False. 6LoWPAN uses a compressed and adapted version of IPv6, not traditional IPv6. It introduces header compression, fragmentation, and reassembly to fit IPv6 packets within the small MTU of IEEE 802.15.4 frames (127 bytes max)."
+        explanation: "False. 6LoWPAN uses a compressed and adapted version of IPv6, introducing header compression, fragmentation, and reassembly to fit within the small MTU of IEEE 802.15.4 frames."
     },
     {
         question: "Which type of modulation is used in IEEE 802.15.4?",
         type: 'single',
         options: ["Direct Sequence Spread Spectrum (DSSS)", "Orthogonal Frequency-Division Multiplexing (OFDM)", "Frequency Shift Keying (FSK)", "Phase-Shift Keying (PSK)"],
         correct: 0,
-        explanation: "IEEE 802.15.4 uses Direct Sequence Spread Spectrum (DSSS) for modulation in the 2.4 GHz band. DSSS spreads the signal over a wider bandwidth using a chipping sequence, providing resistance to interference."
+        explanation: "IEEE 802.15.4 uses Direct Sequence Spread Spectrum (DSSS) for modulation in the 2.4 GHz band."
     },
     {
         question: "Which of the following is true about Thread Network?",
@@ -2037,47 +2044,47 @@ const ieee802154ThreadQuestions = [
             "None of the Above"
         ],
         correct: 4,
-        explanation: "None of the above are correct: (1) Link-local addresses (not ULA) are used for mesh establishment and link maintenance. (2) Thread devices can be assigned multiple addresses. (3) Thread uses a partial mesh — not all devices are full mesh participants (End Devices are leaves). (4) Thread supports up to 32 routers (not limited to 10)."
+        explanation: "None of the above are correct. Link-local addresses (not ULA) are used for mesh establishment. Thread devices can have multiple addresses. Thread uses partial mesh. Thread supports up to 32 routers."
     },
     {
         question: "Which of the following are used by IEEE 802.15.4? (Select all that apply)",
         type: 'multiple',
         options: ["Frequency Hopping Spread Spectrum", "Direct Sequence Spread Spectrum", "CSMA with Collision Avoidance", "CSMA with Collision Detection"],
         correct: [1, 2],
-        explanation: "IEEE 802.15.4 uses Direct Sequence Spread Spectrum (DSSS) for its PHY layer modulation and CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance) for its MAC layer channel access. It does NOT use FHSS or CSMA/CD."
+        explanation: "IEEE 802.15.4 uses DSSS for PHY and CSMA/CA for MAC. It does NOT use FHSS or CSMA/CD."
     },
     {
         question: "The size of MTU for an 802.15.4 network is equal to 127 bytes. Of which, 802.15.4 header occupies 25 bytes, security option occupies 21 bytes, IPv6 and UDP compressed headers occupy 10 bytes. Given this situation, choose which of the following application layer payloads (only the size of the payload is shown) can be transmitted over the network. Assume Thread protocol is used for the higher layers.",
         type: 'single',
         options: ["71", "80", "120", "127", "All of the above"],
         correct: 4,
-        explanation: "Available payload = 127 - 25 - 21 - 10 = 71 bytes. Any payload of 71 bytes or less can be transmitted without fragmentation. All options (71, 80... wait — only 71 fits in a single frame, but Thread supports 6LoWPAN fragmentation, so larger payloads like 80 can also be transmitted via fragmentation. With Thread/6LoWPAN fragmentation, all the listed sizes can be transmitted."
+        explanation: "Available payload = 127 - 25 - 21 - 10 = 71 bytes per frame. With Thread/6LoWPAN fragmentation, all the listed sizes can be transmitted."
     },
     {
         question: "Which of the following phases are required for a device to re-attach to a Thread Network? (You can select more than one)",
         type: 'multiple',
         options: ["Configuring", "Attaching", "Commissioning", "Discovery"],
         correct: [1],
-        explanation: "When a device re-attaches to a Thread Network (i.e., it has previously joined), it only needs the Attaching phase — it already has the network credentials from commissioning. Discovery and Commissioning are only needed for the first-time join process."
+        explanation: "When a device re-attaches (previously joined), it only needs the Attaching phase — it already has credentials from commissioning."
     },
     {
         question: "What kind of network topology is supported by IEEE 802.15.4? (Select all that apply)",
         type: 'multiple',
         options: ["Bus", "Mesh", "Star", "Point-to-Point"],
         correct: [1, 2, 3],
-        explanation: "IEEE 802.15.4 supports Star, Mesh (peer-to-peer), and Point-to-Point topologies. Bus topology is not supported by IEEE 802.15.4."
+        explanation: "IEEE 802.15.4 supports Star, Mesh (peer-to-peer), and Point-to-Point topologies. Bus topology is not supported."
     },
     {
         question: "Assume that a user wants to transmit bit 0 using Direct Sequence Spread Spectrum. The user using 'XOR' to generate the same. What is the transmitted signal (in binary) if the chipping sequence is 011011000101?",
         type: 'input',
         correctAnswer: "011011000101",
-        explanation: "In DSSS with XOR: bit 0 XOR chipping sequence = 0 XOR each chip = the chipping sequence itself (since 0 XOR x = x). So transmitting bit 0 with chipping sequence 011011000101 gives 011011000101."
+        explanation: "In DSSS with XOR: bit 0 XOR chipping sequence = 0 XOR each chip = the chipping sequence itself (since 0 XOR x = x)."
     },
     {
         question: "Assume that a user wants to transmit bit 1 using Direct Sequence Spread Spectrum. The user using 'XOR' to generate the same. What is the transmitted signal (in binary) if the chipping sequence is 101011010011?",
         type: 'input',
         correctAnswer: "010100101100",
-        explanation: "In DSSS with XOR: bit 1 XOR chipping sequence = 1 XOR each chip = inverted chipping sequence (since 1 XOR x = NOT x). So 101011010011 inverted = 010100101100."
+        explanation: "In DSSS with XOR: bit 1 XOR chipping sequence = inverted chipping sequence (since 1 XOR x = NOT x). 101011010011 inverted = 010100101100."
     }
 ];
 
@@ -2172,7 +2179,6 @@ function shuffleDropdownAndMatch(q) {
             shuffleArrayDifferent(paired);
             item.descriptions = paired.map(p => p.desc);
 
-            // match dropdown values are 1-based
             if (typeof item.correct === 'number') {
                 item.correct = paired.findIndex(p => p.oldIndex === (item.correct - 1)) + 1;
             }
@@ -2216,7 +2222,7 @@ function switchTopic(idx) {
 
     if (idx === DISPUTED_IDX) {
         document.getElementById('topbar-title').textContent = '⚠️ Disputed Questions';
-        document.getElementById('topbar-sub').textContent = '5 questions with xSite discrepancies';
+        document.getElementById('topbar-sub').textContent = '7 questions with xSite discrepancies';
         document.getElementById('progress-bar').style.width = '0%';
         document.getElementById('progress-label').textContent = '—';
         renderDisputed();
@@ -2248,11 +2254,6 @@ function updateProgress() {
 // ── DISPUTED QUESTIONS DATA ───────────────────────────────────────────────
 const disputedQuestions = [
     {
-        topic: "Intro to IoT",
-        question: "Which of the following technology uses 2.4GHz frequency?",
-        answer: "<strong>BLE, Wi-Fi, Wireless-HART, and ZigBee</strong> — all operate on the 2.4GHz ISM band per the lecture slides and independent research. xSite does not accept this combination, but based on our slides all four are correct."
-    },
-    {
         topic: "CoAP & MQTT",
         question: "What is the default port number for MQTT?",
         answer: "The correct answer is <strong>1883</strong>. xSite has a typo listing it as <strong>1833</strong> — this is a data entry error on the platform. Every official MQTT source and the MQTT specification confirms port 1883."
@@ -2268,9 +2269,24 @@ const disputedQuestions = [
         answer: "Z-Wave operates on <strong>868 MHz in Europe</strong> and <strong>915 MHz in the US</strong> — both are valid. xSite likely expects only one answer. The slides lean towards <strong>868 MHz</strong> as the primary European frequency. If only one option is available, select 868 MHz."
     },
     {
+        topic: "AIoT & Cloud",
+        question: "AIoT stands for?",
+        answer: "xSite marks <strong>'Artificial Intelligence on IoT'</strong> as correct. However, the widely accepted and industry-standard expansion is <strong>'Artificial Intelligence of Things'</strong> — which is the definition used in most academic and industry sources. The quiz now reflects xSite's answer (option C), but know that 'of Things' is the proper full form."
+    },
+    {
         topic: "Cellular IoT",
         question: "A network manager chose to use QPSK (Quadrature Phase Shift Keying) as the modulation scheme for the NB-IoT network. Given this scenario, select how many bits can an NB-IoT transmit at any given point of time. (Select only the possible option)",
         answer: "QPSK encodes <strong>2 bits per symbol</strong> — this is fundamental modulation theory. xSite marks this as <em>'None of the above'</em>, which contradicts the definition of QPSK. The technically and mathematically correct answer is <strong>2 bits</strong>."
+    },
+    {
+        topic: "WiFi & HaLow",
+        question: "How many non-overlapping WiFi channels are there for the 2.4GHz band?",
+        answer: "xSite marks <strong>11</strong> as correct (the total number of available channels in most regions). However, only <strong>3 channels</strong> (1, 6, and 11) are truly non-overlapping. The question asks for non-overlapping channels, making 3 the technically correct answer — but xSite expects 11."
+    },
+    {
+        topic: "WiFi & HaLow",
+        question: "Select the true statements for WiFi.",
+        answer: "xSite marks both <strong>'Its frequency ranges from 2.4GHz to 2.5GHz'</strong> and <strong>'The 5GHz Band has a 150MHz bandwidth'</strong> as correct. The first statement is accurate (100MHz bandwidth). The second is technically wrong — the 5GHz band spans approximately 700MHz, not 150MHz. xSite expects both to be selected."
     }
 ];
 
@@ -2521,7 +2537,6 @@ function checkSingleQuestion(qi) {
     }
 
     if (q.type === 'match' || q.type === 'dropdown') {
-        // Check each dropdown row
         let allCorrect = true;
         q.items.forEach((item, ii) => {
             const uv = ua?.[ii];
@@ -2536,7 +2551,6 @@ function checkSingleQuestion(qi) {
         return;
     }
 
-    // multi-select path (unchanged)
     const ca = q.correct;
     const inputs = document.querySelectorAll(`input[name="q${qi}"]`);
     inputs.forEach((inp, oi) => {
